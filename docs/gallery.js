@@ -26,12 +26,16 @@
     if (!images.length) return;
     const track = document.createElement('span');
     track.className = 'gallery-track';
-    images.forEach((image) => track.appendChild(image));
+    images.forEach((image) => { image.draggable = false; track.appendChild(image); });
     gallery.prepend(track);
     let index = 0;
     let timer;
     let paused = false;
     let animationFrame;
+    let dragging = false;
+    let didDrag = false;
+    let pointerStart = 0;
+    let scrollStart = 0;
 
     const glideTo = (target, duration = 1400) => {
       window.cancelAnimationFrame(animationFrame);
@@ -83,12 +87,48 @@
       gallery.addEventListener('mouseleave', () => { paused = false; });
       gallery.addEventListener('focusin', () => { paused = true; });
       gallery.addEventListener('focusout', () => { paused = false; });
+
+      const finishDrag = (event) => {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove('is-dragging');
+        if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+        const nearest = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+        moveTo(nearest, true);
+        paused = false;
+        restart();
+      };
+
+      track.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        window.cancelAnimationFrame(animationFrame);
+        dragging = true;
+        didDrag = false;
+        paused = true;
+        pointerStart = event.clientX;
+        scrollStart = track.scrollLeft;
+        track.setPointerCapture(event.pointerId);
+        track.classList.add('is-dragging');
+      });
+      track.addEventListener('pointermove', (event) => {
+        if (!dragging) return;
+        const delta = event.clientX - pointerStart;
+        if (Math.abs(delta) > 6) didDrag = true;
+        track.scrollLeft = scrollStart - delta;
+        if (didDrag) event.preventDefault();
+      });
+      track.addEventListener('pointerup', finishDrag);
+      track.addEventListener('pointercancel', finishDrag);
       restart();
     }
 
     images.forEach((image, imageIndex) => image.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
+      if (didDrag) {
+        didDrag = false;
+        return;
+      }
       activeImages = images;
       showLightboxImage(imageIndex);
       lightbox.showModal();
