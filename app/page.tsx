@@ -96,21 +96,24 @@ export default function Home() {
         </header>
         <div className="product-grid">
           {[
-            ["01", "ER4", "er4.png", "A bright aviation-inspired analog face with a radial dial, bold numerals and distinctive red-star insignia."],
-            ["02", "ER5", "er5.png", "A high-contrast pilot dial that combines an outer minute scale with a compact inner twelve-hour register."],
-            ["03", "ARTEMIS", "artemis.png", "An orbital digital instrument with Earth and Moon imagery, vivid trajectories and environmental information."],
-            ["04", "SPUTNIK", "sputnik.png", "A space-age analog face inspired by Soviet-era instruments, set against a deep stellar field."],
-            ["05", "CYBER", "cyber.png", "A sculpted mechanical-digital hybrid with exposed fasteners, vivid hands and glanceable activity readouts."],
-            ["06", "ZODIAC", "zodiac.png", "An elaborate celestial dial combining zodiac signs, lunar phase and classical astronomical references."],
-          ].map(([number, name, image, description]) => (
+            { number: "01", name: "ER4", images: ["er4.png"], description: "A bright aviation-inspired analog face with a radial dial, bold numerals and distinctive red-star insignia." },
+            { number: "02", name: "ER5", images: ["er5.png"], description: "A high-contrast pilot dial that combines an outer minute scale with a compact inner twelve-hour register." },
+            { number: "03", name: "ARTEMIS", images: ["artemis-smartwatch.png", "artemis-campaign.png"], description: "A celebration of Artemis II — the first crewed mission of NASA’s Artemis campaign. Four astronauts flew Orion around the Moon to validate deep-space systems and help prepare the way for future human lunar exploration.", features: ["Visual and numeric step counter", "Visual and numeric battery status", "Illustrated Artemis II trajectory around Earth", "Real-time lunar phase visualization", "Selectable additional time zone", "Current temperature and forecasts at +3, +6 and +9 hours", "Continuously rotating star field"] },
+            { number: "04", name: "SPUTNIK", images: ["sputnik.png"], description: "A space-age analog face inspired by Soviet-era instruments, set against a deep stellar field." },
+            { number: "05", name: "CYBER", images: ["cyber.png"], description: "A sculpted mechanical-digital hybrid with exposed fasteners, vivid hands and glanceable activity readouts." },
+            { number: "06", name: "ZODIAC", images: ["zodiac.png"], description: "An elaborate celestial dial combining zodiac signs, lunar phase and classical astronomical references." },
+          ].map(({ number, name, images, description, features }) => (
             <details className="product-card" key={name} suppressHydrationWarning>
               <summary>
-                <Image src={`/products/${image}`} alt={`${name} watch face`} width={500} height={500} />
-                <span className="product-title"><small>DG—{number}</small><strong>{name}</strong><em>View details +</em></span>
+                <span className={`product-carousel ${images.length > 1 ? "has-slides" : ""}`} aria-label={`${name} image gallery`} tabIndex={images.length > 1 ? 0 : -1}>
+                  {images.map((image, index) => <Image key={image} src={`/products/${image}`} alt={images.length > 1 ? `${name} product image ${index + 1} of ${images.length}` : `${name} watch face`} width={900} height={900} />)}
+                </span>
+                <span className="product-title"><small>DG—{number}</small><strong>{name}</strong>{images.length > 1 ? <span className="slide-hint">Swipe the images →</span> : null}<em>View details +</em></span>
               </summary>
               <div className="product-details">
                 <p>{description}</p>
-                <dl><div><dt>Platform</dt><dd>Wear OS</dd></div><div><dt>Features</dt><dd>Full specification coming soon</dd></div><div><dt>Status</dt><dd>In development</dd></div></dl>
+                {features ? <div className="feature-spec"><h4>Functions at a glance</h4><ul>{features.map(feature => <li key={feature}>{feature}</li>)}</ul></div> : null}
+                <dl><div><dt>Platform</dt><dd>Wear OS</dd></div><div><dt>Features</dt><dd>{features ? `${features.length} documented functions` : "Full specification coming soon"}</dd></div><div><dt>Status</dt><dd>In development</dd></div></dl>
                 <span className="store-placeholder">Google Play · Coming soon</span>
               </div>
             </details>

@@ -132,16 +132,23 @@ p { text-wrap: pretty; }
 .product-card:nth-child(odd) { border-right: 1px solid var(--rule); }
 .product-card summary { list-style: none; cursor: pointer; padding: clamp(24px, 4vw, 52px); display: grid; grid-template-columns: minmax(150px, .8fr) 1fr; gap: clamp(24px, 4vw, 52px); align-items: center; }
 .product-card summary::-webkit-details-marker { display: none; }
-.product-card summary img { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; transition: transform 600ms cubic-bezier(.22,1,.36,1); }
-.product-card summary:hover img { transform: scale(1.035) rotate(-1deg); }
+.product-carousel { display: flex; width: 100%; aspect-ratio: 1; overflow: hidden; }
+.product-carousel.has-slides { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--accent) var(--surface); }
+.product-carousel img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; transition: transform 600ms cubic-bezier(.22,1,.36,1); }
+.product-card summary:hover .product-carousel:not(.has-slides) img { transform: scale(1.035) rotate(-1deg); }
 .product-title { display: flex; flex-direction: column; align-items: flex-start; }
 .product-title small { color: var(--muted); font-size: 11px; }
 .product-title strong { font-family: "Barlow Condensed", sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; font-weight: 500; margin: 16px 0 30px; }
 .product-title em { color: var(--accent); font-size: 12px; font-style: normal; }
+.slide-hint { color: var(--muted); font-size: 11px; margin: -18px 0 22px; }
 .product-card[open] .product-title em { font-size: 0; }
 .product-card[open] .product-title em::after { content: "Close details −"; font-size: 12px; }
 .product-details { padding: 0 clamp(24px, 4vw, 52px) clamp(36px, 5vw, 64px); }
 .product-details > p { color: oklch(0.83 0.014 100); max-width: 60ch; }
+.feature-spec { margin-top: 34px; padding: 28px; background: var(--surface); }
+.feature-spec h4 { margin: 0 0 20px; font-family: "Barlow Condensed", sans-serif; font-size: 1.6rem; font-weight: 500; }
+.feature-spec ul { columns: 2; column-gap: 45px; margin: 0; padding-left: 18px; color: oklch(0.8 0.014 100); font-size: 13px; }
+.feature-spec li { break-inside: avoid; margin-bottom: 10px; }
 .product-details dl { margin: 30px 0; border-top: 1px solid var(--rule); }
 .product-details dl div { display: grid; grid-template-columns: .5fr 1fr; gap: 18px; border-bottom: 1px solid var(--rule); padding: 13px 0; }
 .product-details dt { color: var(--muted); font-size: 12px; }
@@ -201,6 +208,7 @@ footer > div:last-child { display: flex; gap: 25px; }
   .product-grid { grid-template-columns: 1fr; }
   .product-card:nth-child(odd) { border-right: 0; }
   .product-card summary { grid-template-columns: minmax(120px, .75fr) 1fr; }
+  .feature-spec ul { columns: 1; }
   .status { justify-self: start; }
   .seal { margin-inline: auto; }
   footer { grid-template-columns: 1fr; }
