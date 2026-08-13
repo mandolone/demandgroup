@@ -1,0 +1,186 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Demand Group — Independent Watch Faces for Wear OS",
+  description:
+    "An independent studio creating uncommon, vintage-inspired watch faces for Wear OS.",
+};
+
+const Arrow = () => <span aria-hidden="true">↗</span>;
+
+export default function Home() {
+  return (
+    <main>
+      <nav className="nav" aria-label="Primary navigation">
+        <a className="wordmark" href="#top" aria-label="Demand Group home">
+          <span className="mark">DG</span>
+          <span>Demand Group</span>
+        </a>
+        <div className="nav-links">
+          <a href="#studio">Studio</a>
+          <a href="#collection">Collection</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+
+      <section className="hero" id="top">
+        <Image
+          className="hero-image"
+          src="/hero-watches.png"
+          alt="Three conceptual dark watch faces inspired by vintage scientific instruments"
+          fill
+          priority
+          sizes="100vw"
+        />
+        <div className="hero-shade" />
+        <div className="hero-content">
+          <p className="edition">Independent Wear OS studio · Italy</p>
+          <h1>Uncommon timepieces for remarkable wrists.</h1>
+          <p className="hero-copy">
+            Small-batch watch faces shaped by vintage instruments, mechanical
+            detail and a taste for the unexpected.
+          </p>
+          <a className="primary-action" href="#collection">
+            Enter the collection <Arrow />
+          </a>
+        </div>
+        <p className="hero-note">Concept imagery · Original faces coming to Google Play</p>
+      </section>
+
+      <section className="statement" id="studio">
+        <p className="section-index">Demand Group / The studio</p>
+        <div>
+          <h2>Designed for people who refuse the default.</h2>
+          <p>
+            Demand Group is a small independent studio devoted to distinctive
+            Wear OS watch faces. We approach every dial as a compact designed
+            object — precise enough for daily use, peculiar enough to remain
+            memorable.
+          </p>
+        </div>
+      </section>
+
+      <section className="principles" aria-label="Design principles">
+        <article>
+          <span>01</span>
+          <h3>Vintage, reconsidered</h3>
+          <p>
+            References to laboratory instruments, aviation panels and archival
+            typography, translated for a contemporary wrist.
+          </p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Small by choice</h3>
+          <p>
+            A selective catalogue developed with care. No endless library, no
+            disposable variations — only faces with a reason to exist.
+          </p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Useful eccentricity</h3>
+          <p>
+            Character never comes at the expense of legibility, battery-aware
+            design or the information you need at a glance.
+          </p>
+        </article>
+      </section>
+
+      <section className="collection" id="collection">
+        <header>
+          <p>First collection</p>
+          <h2>Instruments for a digital wrist.</h2>
+          <span>Launching on Google Play</span>
+        </header>
+        <div className="collection-list">
+          <article>
+            <span className="catalogue-no">DG—01</span>
+            <div>
+              <h3>Chronoscope</h3>
+              <p>Layered scales, restrained brass and observatory precision.</p>
+            </div>
+            <span className="status">In development</span>
+          </article>
+          <article>
+            <span className="catalogue-no">DG—02</span>
+            <div>
+              <h3>Night Gauge</h3>
+              <p>A dark instrument panel distilled into a highly legible dial.</p>
+            </div>
+            <span className="status">In development</span>
+          </article>
+          <article>
+            <span className="catalogue-no">DG—03</span>
+            <div>
+              <h3>Odd Hours</h3>
+              <p>An unconventional display for collectors of curious objects.</p>
+            </div>
+            <span className="status">In development</span>
+          </article>
+        </div>
+        <p className="collection-disclaimer">
+          Collection names and concept imagery are provisional. Final product
+          previews and Google Play links will be published at launch.
+        </p>
+      </section>
+
+      <section className="wear-os">
+        <div className="seal" aria-hidden="true">
+          <span>W</span>
+        </div>
+        <div>
+          <h2>Made for Wear OS.</h2>
+          <p>
+            Designed for compatible Wear OS smartwatches using Google&apos;s
+            current watch-face standards, with clear information, considered
+            always-on states and efficient everyday performance.
+          </p>
+          <p className="fine-print">
+            Wear OS and Google Play are trademarks of Google LLC. Demand Group
+            is an independent studio and is not affiliated with Google.
+          </p>
+        </div>
+      </section>
+
+      <section className="contact" id="contact">
+        <div>
+          <p className="section-index">Business & support</p>
+          <h2>The collection is taking shape.</h2>
+        </div>
+        <div className="contact-copy">
+          <p>
+            Demand Group is preparing its first independent releases for Google
+            Play. Official product links and support contact details will be
+            added here before launch.
+          </p>
+          <a href="#top">Return to the beginning ↑</a>
+        </div>
+      </section>
+
+      <section className="privacy" id="privacy">
+        <h2>Website privacy</h2>
+        <p>
+          This presentation website does not use accounts, advertising cookies,
+          analytics or contact forms, and does not intentionally collect
+          personal information. If these features are introduced, this notice
+          will be updated before they become active.
+        </p>
+        <p>Last updated: 13 August 2026.</p>
+      </section>
+
+      <footer>
+        <div className="wordmark footer-wordmark">
+          <span className="mark">DG</span>
+          <span>Demand Group</span>
+        </div>
+        <p>Independent Wear OS watch-face studio.</p>
+        <div>
+          <a href="/privacy-policy/">App Privacy Policy</a>
+          <span>© 2026 Demand Group</span>
+        </div>
+      </footer>
+    </main>
+  );
+}
