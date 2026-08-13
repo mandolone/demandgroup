@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description:
       "Independent, vintage-inspired watch faces designed for Wear OS.",
     type: "website",
-    images: [{ url: "/hero-watches.png", width: 1776, height: 887 }],
+    images: [{ url: "/hero-collection.png", width: 1536, height: 1024 }],
   },
 };
 

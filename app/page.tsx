@@ -27,8 +27,8 @@ export default function Home() {
       <section className="hero" id="top">
         <Image
           className="hero-image"
-          src="/hero-watches.png"
-          alt="Three conceptual dark watch faces inspired by vintage scientific instruments"
+          src="/hero-collection.png"
+          alt="Five Demand Group Wear OS watch faces displayed in a vintage instrument atelier"
           fill
           priority
           sizes="100vw"
@@ -45,7 +45,7 @@ export default function Home() {
             Enter the collection <Arrow />
           </a>
         </div>
-        <p className="hero-note">Concept imagery · Original faces coming to Google Play</p>
+        <p className="hero-note">Real Demand Group faces · Presentation mockup</p>
       </section>
 
       <section className="statement" id="studio">
@@ -94,36 +94,29 @@ export default function Home() {
           <h2>Instruments for a digital wrist.</h2>
           <span>Launching on Google Play</span>
         </header>
-        <div className="collection-list">
-          <article>
-            <span className="catalogue-no">DG—01</span>
-            <div>
-              <h3>Chronoscope</h3>
-              <p>Layered scales, restrained brass and observatory precision.</p>
-            </div>
-            <span className="status">In development</span>
-          </article>
-          <article>
-            <span className="catalogue-no">DG—02</span>
-            <div>
-              <h3>Night Gauge</h3>
-              <p>A dark instrument panel distilled into a highly legible dial.</p>
-            </div>
-            <span className="status">In development</span>
-          </article>
-          <article>
-            <span className="catalogue-no">DG—03</span>
-            <div>
-              <h3>Odd Hours</h3>
-              <p>An unconventional display for collectors of curious objects.</p>
-            </div>
-            <span className="status">In development</span>
-          </article>
+        <div className="product-grid">
+          {[
+            ["01", "ER4", "er4.png", "A bright aviation-inspired analog face with a radial dial, bold numerals and distinctive red-star insignia."],
+            ["02", "ER5", "er5.png", "A high-contrast pilot dial that combines an outer minute scale with a compact inner twelve-hour register."],
+            ["03", "ARTEMIS", "artemis.png", "An orbital digital instrument with Earth and Moon imagery, vivid trajectories and environmental information."],
+            ["04", "SPUTNIK", "sputnik.png", "A space-age analog face inspired by Soviet-era instruments, set against a deep stellar field."],
+            ["05", "CYBER", "cyber.png", "A sculpted mechanical-digital hybrid with exposed fasteners, vivid hands and glanceable activity readouts."],
+            ["06", "ZODIAC", "zodiac.png", "An elaborate celestial dial combining zodiac signs, lunar phase and classical astronomical references."],
+          ].map(([number, name, image, description]) => (
+            <details className="product-card" key={name} suppressHydrationWarning>
+              <summary>
+                <Image src={`/products/${image}`} alt={`${name} watch face`} width={500} height={500} />
+                <span className="product-title"><small>DG—{number}</small><strong>{name}</strong><em>View details +</em></span>
+              </summary>
+              <div className="product-details">
+                <p>{description}</p>
+                <dl><div><dt>Platform</dt><dd>Wear OS</dd></div><div><dt>Features</dt><dd>Full specification coming soon</dd></div><div><dt>Status</dt><dd>In development</dd></div></dl>
+                <span className="store-placeholder">Google Play · Coming soon</span>
+              </div>
+            </details>
+          ))}
         </div>
-        <p className="collection-disclaimer">
-          Collection names and concept imagery are provisional. Final product
-          previews and Google Play links will be published at launch.
-        </p>
+        <p className="collection-disclaimer">Product specifications and Google Play links will be added as each watch face reaches release.</p>
       </section>
 
       <section className="wear-os">
