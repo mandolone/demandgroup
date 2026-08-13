@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Demand Group — Independent Watch Faces for Wear OS",
@@ -179,6 +180,13 @@ export default function Home() {
           <span>© 2026 Demand Group</span>
         </div>
       </footer>
+      <dialog className="product-lightbox" id="product-lightbox" aria-label="Expanded product image">
+        <button className="lightbox-close" type="button" aria-label="Close expanded image">×</button>
+        <button className="lightbox-arrow lightbox-prev" type="button" aria-label="Previous image">←</button>
+        <figure><img alt="" /><figcaption></figcaption></figure>
+        <button className="lightbox-arrow lightbox-next" type="button" aria-label="Next image">→</button>
+      </dialog>
+      <Script src="/gallery.js" strategy="afterInteractive" />
     </main>
   );
 }
