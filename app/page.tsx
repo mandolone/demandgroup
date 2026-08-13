@@ -100,9 +100,10 @@ export default function Home() {
             { number: "02", name: "ER5", images: ["er5.png"], description: "A high-contrast pilot dial that combines an outer minute scale with a compact inner twelve-hour register." },
             { number: "03", name: "ARTEMIS", images: ["artemis-smartwatch.png", "artemis-campaign.png"], description: "A celebration of Artemis II — the first crewed mission of NASA’s Artemis campaign. Four astronauts flew Orion around the Moon to validate deep-space systems and help prepare the way for future human lunar exploration.", features: ["Visual and numeric step counter", "Visual and numeric battery status", "Illustrated Artemis II trajectory around Earth", "Real-time lunar phase visualization", "Selectable additional time zone", "Current temperature and forecasts at +3, +6 and +9 hours", "Continuously rotating star field"] },
             { number: "04", name: "SPUTNIK", images: ["sputnik.png"], description: "A space-age analog face inspired by Soviet-era instruments, set against a deep stellar field." },
-            { number: "05", name: "CYBER", images: ["cyber.png"], description: "A sculpted mechanical-digital hybrid with exposed fasteners, vivid hands and glanceable activity readouts." },
-            { number: "06", name: "ZODIAC", images: ["zodiac.png"], description: "An elaborate celestial dial combining zodiac signs, lunar phase and classical astronomical references." },
-          ].map(({ number, name, images, description, features }) => (
+            { number: "05", name: "CYBER", images: ["cyber-smartwatch.png", "cyber-campaign.png"], description: "A precision-built hybrid dial where exposed hardware, vivid red hands and sculpted digital gauges meet in a bold technical instrument.", features: ["Analog time with central seconds", "Visual battery gauge", "Visual step-progress gauge", "Heart-rate display", "Date and weather information", "High-contrast cardinal numerals"], provisional: true },
+            { number: "06", name: "GEAR", images: ["gear-smartwatch.png", "gear-campaign.png"], description: "A mechanical dashboard inspired by gears, workshop instruments and layered industrial forms, designed to make everyday information feel tactile.", features: ["Analog time with precision minute register", "Visual battery gauge", "Visual and numeric step counter", "Heart-rate display", "Date and temperature information", "Layered mechanical dial architecture"], provisional: true },
+            { number: "07", name: "ZODIAC", images: ["zodiac.png"], description: "An elaborate celestial dial combining zodiac signs, lunar phase and classical astronomical references." },
+          ].map(({ number, name, images, description, features, provisional }) => (
             <details className="product-card" key={name} suppressHydrationWarning>
               <summary>
                 <span className={`product-carousel ${images.length > 1 ? "has-slides" : ""}`} aria-label={`${name} image gallery`} tabIndex={images.length > 1 ? 0 : -1}>
@@ -111,9 +112,10 @@ export default function Home() {
                 <span className="product-title"><small>DG—{number}</small><strong>{name}</strong>{images.length > 1 ? <span className="slide-hint">Swipe the images →</span> : null}<em>View details +</em></span>
               </summary>
               <div className="product-details">
+                {provisional ? <p className="provisional-note">Provisional product description · Final specifications to be confirmed</p> : null}
                 <p>{description}</p>
                 {features ? <div className="feature-spec"><h4>Functions at a glance</h4><ul>{features.map(feature => <li key={feature}>{feature}</li>)}</ul></div> : null}
-                <dl><div><dt>Platform</dt><dd>Wear OS</dd></div><div><dt>Features</dt><dd>{features ? `${features.length} documented functions` : "Full specification coming soon"}</dd></div><div><dt>Status</dt><dd>In development</dd></div></dl>
+                <dl><div><dt>Platform</dt><dd>Wear OS</dd></div><div><dt>Features</dt><dd>{features ? `${features.length} ${provisional ? "provisional" : "documented"} functions` : "Full specification coming soon"}</dd></div><div><dt>Status</dt><dd>In development</dd></div></dl>
                 <span className="store-placeholder">Google Play · Coming soon</span>
               </div>
             </details>

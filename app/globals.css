@@ -147,6 +147,7 @@ p { text-wrap: pretty; }
 .product-card[open] .product-title em::after { content: "Close details −"; font-size: 12px; }
 .product-details { padding: 0 clamp(24px, 4vw, 52px) clamp(36px, 5vw, 64px); }
 .product-details > p { color: oklch(0.83 0.014 100); max-width: 60ch; }
+.product-details .provisional-note { display: inline-block; margin-bottom: 16px; color: var(--accent); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
 .feature-spec { margin-top: 34px; padding: 28px; background: var(--surface); }
 .feature-spec h4 { margin: 0 0 20px; font-family: var(--font-display), sans-serif; font-size: 1.6rem; font-weight: 500; }
 .feature-spec ul { columns: 2; column-gap: 45px; margin: 0; padding-left: 18px; color: oklch(0.8 0.014 100); font-size: 13px; }
