@@ -127,26 +127,27 @@ p { text-wrap: pretty; }
 .collection-list p { color: var(--muted); margin: 0; }
 .status { border: 1px solid var(--primary-light); border-radius: 999px; padding: 7px 12px; color: var(--primary-light); }
 .collection-disclaimer { max-width: 650px; color: var(--muted); font-size: 12px; margin: 30px 0 0 auto; }
-.product-grid { display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--rule); }
+.product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
 .product-card { border-bottom: 1px solid var(--rule); }
-.product-card:nth-child(odd) { border-right: 0; }
-.product-card summary { list-style: none; cursor: pointer; padding: clamp(30px, 5vw, 72px); display: grid; grid-template-columns: minmax(360px, 1.35fr) minmax(230px, .65fr); gap: clamp(35px, 7vw, 110px); align-items: center; }
+.product-card:nth-child(odd) { border-right: 1px solid var(--rule); }
+.product-card summary { list-style: none; cursor: pointer; padding: clamp(22px, 3vw, 46px); display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
 .product-card summary::-webkit-details-marker { display: none; }
-.product-carousel { position: relative; display: flex; width: 100%; max-width: 760px; aspect-ratio: 1; overflow: hidden; background: oklch(0.095 0 0); cursor: zoom-in; }
-.product-carousel.has-slides { overflow-x: hidden; scroll-snap-type: x mandatory; }
+.product-carousel { position: relative; display: block; width: 100%; max-width: 680px; margin-inline: auto; background: oklch(0.095 0 0); cursor: zoom-in; }
+.gallery-track { display: flex; width: 100%; aspect-ratio: 1; overflow: hidden; scroll-snap-type: x mandatory; }
 .product-carousel img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; transition: transform 600ms cubic-bezier(.22,1,.36,1); }
 .product-card summary:hover .product-carousel:not(.has-slides) img { transform: scale(1.035) rotate(-1deg); }
 .product-title { display: flex; flex-direction: column; align-items: flex-start; }
 .product-title small { color: var(--muted); font-size: 11px; }
-.product-title strong { font-family: "Barlow Condensed", sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; font-weight: 500; margin: 16px 0 30px; }
+.product-title strong { font-family: "Barlow Condensed", sans-serif; font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1; font-weight: 500; margin: 12px 0 24px; }
 .product-title em { color: var(--accent); font-size: 12px; font-style: normal; }
 .slide-hint { color: var(--muted); font-size: 11px; margin: -18px 0 22px; }
-.gallery-controls { position: absolute; z-index: 3; left: 50%; bottom: 16px; display: flex; align-items: center; gap: 10px; padding: 7px 9px; border-radius: 999px; background: oklch(0.08 0 0 / .82); transform: translateX(-50%); }
+.gallery-controls { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 78px; padding: 10px 12px; border-top: 1px solid var(--rule); background: oklch(0.07 0 0); cursor: default; }
 .gallery-control { display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; font-size: 14px; }
 .gallery-control:hover, .gallery-control:focus-visible { background: oklch(0.28 0.04 100); }
-.gallery-dots { display: flex; gap: 6px; }
-.gallery-dot { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: oklch(0.58 0.01 90); cursor: pointer; }
-.gallery-dot.is-active { background: var(--accent); }
+.gallery-dots { display: flex; gap: 8px; }
+.gallery-dot { width: 58px; height: 52px; padding: 3px; border: 1px solid transparent; border-radius: 2px; background: oklch(0.12 0 0); cursor: pointer; overflow: hidden; }
+.gallery-dot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.gallery-dot.is-active { border-color: var(--accent); background: oklch(0.2 0.04 95); }
 .product-card[open] .product-title em { font-size: 0; }
 .product-card[open] .product-title em::after { content: "Close details −"; font-size: 12px; }
 .product-details { padding: 0 clamp(24px, 4vw, 52px) clamp(36px, 5vw, 64px); }

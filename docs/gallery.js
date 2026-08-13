@@ -24,13 +24,17 @@
   document.querySelectorAll('.product-carousel').forEach((gallery) => {
     const images = [...gallery.querySelectorAll('img')];
     if (!images.length) return;
+    const track = document.createElement('span');
+    track.className = 'gallery-track';
+    images.forEach((image) => track.appendChild(image));
+    gallery.prepend(track);
     let index = 0;
     let timer;
     let paused = false;
 
     const moveTo = (nextIndex, smooth = true) => {
       index = (nextIndex + images.length) % images.length;
-      gallery.scrollTo({ left: gallery.clientWidth * index, behavior: smooth && !reducedMotion ? 'smooth' : 'auto' });
+      track.scrollTo({ left: track.clientWidth * index, behavior: smooth && !reducedMotion ? 'smooth' : 'auto' });
       gallery.querySelectorAll('.gallery-dot').forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
     };
 
@@ -49,6 +53,9 @@
         dot.className = `gallery-dot${dotIndex === 0 ? ' is-active' : ''}`;
         dot.type = 'button';
         dot.setAttribute('aria-label', `Show image ${dotIndex + 1}`);
+        const thumbnail = images[dotIndex].cloneNode();
+        thumbnail.alt = '';
+        dot.appendChild(thumbnail);
         dot.addEventListener('click', (event) => { event.preventDefault(); event.stopPropagation(); moveTo(dotIndex); restart(); });
         dots.appendChild(dot);
       });
