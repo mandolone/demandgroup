@@ -31,16 +31,33 @@
     let index = 0;
     let timer;
     let paused = false;
+    let animationFrame;
+
+    const glideTo = (target, duration = 1400) => {
+      window.cancelAnimationFrame(animationFrame);
+      const start = track.scrollLeft;
+      const distance = target - start;
+      const startedAt = performance.now();
+      const animate = (now) => {
+        const progress = Math.min((now - startedAt) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        track.scrollLeft = start + distance * eased;
+        if (progress < 1) animationFrame = window.requestAnimationFrame(animate);
+      };
+      animationFrame = window.requestAnimationFrame(animate);
+    };
 
     const moveTo = (nextIndex, smooth = true) => {
       index = (nextIndex + images.length) % images.length;
-      track.scrollTo({ left: track.clientWidth * index, behavior: smooth && !reducedMotion ? 'smooth' : 'auto' });
+      const target = track.clientWidth * index;
+      if (smooth && !reducedMotion) glideTo(target);
+      else track.scrollTo({ left: target, behavior: 'auto' });
       gallery.querySelectorAll('.gallery-dot').forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === index));
     };
 
     const restart = () => {
       window.clearInterval(timer);
-      if (images.length > 1 && !reducedMotion) timer = window.setInterval(() => { if (!paused) moveTo(index + 1); }, 4200);
+      if (images.length > 1 && !reducedMotion) timer = window.setInterval(() => { if (!paused) moveTo(index + 1); }, 6800);
     };
 
     if (images.length > 1) {
