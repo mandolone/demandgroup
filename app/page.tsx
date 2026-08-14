@@ -177,7 +177,10 @@ export default function Home() {
         </div>
         <p>Independent Wear OS watch-face studio.</p>
         <div>
-          <a href="/privacy-policy/">App Privacy Policy</a>
+          <a href="/website-privacy-policy/">Website Privacy</a>
+          <a href="/cookie-policy/">Cookie Policy</a>
+          <a href="/privacy-policy/">App Privacy</a>
+          <button className="footer-link" type="button" data-cookie-settings>Cookie settings</button>
           <span>© 2026 Demand Group</span>
         </div>
       </footer>
