@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   description:
     "A small independent studio creating premium, vintage-inspired and uncommon watch faces for Wear OS.",
   applicationName: "Demand Group",
+  icons: { icon: "/favicon.jpg", shortcut: "/favicon.jpg", apple: "/favicon.jpg" },
   openGraph: {
     title: "Demand Group — Uncommon timepieces for remarkable wrists",
     description:

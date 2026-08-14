@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = { title: "Cookie Policy — Demand Group", description: "Cookies and privacy choices on the Demand Group website." };
 
 export default function CookiePolicy() {
-  return <main className="policy-page"><nav className="policy-nav"><a className="wordmark" href="/"><span className="mark">DG</span><span>Demand Group</span></a><a href="/">Back to studio</a></nav><article className="policy-document">
+  return <main className="policy-page"><nav className="policy-nav"><a className="wordmark" href="/"><img className="brand-logo" src="/demand-group-logo.jpg" alt="Demand Group Italy" width="1280" height="368" /></a><a href="/">Back to studio</a></nav><article className="policy-document">
     <header><p>Demand Group website</p><h1>Cookie Policy</h1><p className="policy-date"><strong>Last updated:</strong> 14 August 2026</p></header>
     <p>This policy explains the cookies and similar technologies used on the Demand Group website. Under Italian rules, technical cookies do not require prior consent but must be disclosed. Non-technical tracking may be activated only after valid consent.</p>
     <h2>What we currently use</h2><p>The site currently uses <strong>no analytics, advertising or profiling cookies</strong>. It stores only the technical preference cookie shown below.</p>

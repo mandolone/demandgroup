@@ -10,8 +10,7 @@ export default function PrivacyPolicy() {
     <main className="policy-page">
       <nav className="policy-nav">
         <a className="wordmark" href="/" aria-label="Return to Demand Group home">
-          <span className="mark">DG</span>
-          <span>Demand Group</span>
+          <img className="brand-logo" src="/demand-group-logo.jpg" alt="Demand Group Italy" width="1280" height="368" />
         </a>
         <a href="/">Back to studio</a>
       </nav>

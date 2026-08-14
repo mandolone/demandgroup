@@ -15,8 +15,7 @@ export default function Home() {
     <main>
       <nav className="nav" aria-label="Primary navigation">
         <a className="wordmark" href="#top" aria-label="Demand Group home">
-          <span className="mark">DG</span>
-          <span>Demand Group</span>
+          <Image className="brand-logo" src="/demand-group-logo.jpg" alt="Demand Group Italy" width={1280} height={368} priority />
         </a>
         <div className="nav-links">
           <a href="#studio">Studio</a>
@@ -172,8 +171,7 @@ export default function Home() {
 
       <footer>
         <div className="wordmark footer-wordmark">
-          <span className="mark">DG</span>
-          <span>Demand Group</span>
+          <Image className="brand-logo" src="/demand-group-logo.jpg" alt="Demand Group Italy" width={1280} height={368} />
         </div>
         <p>Independent Wear OS watch-face studio.</p>
         <div>

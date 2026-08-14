@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = { title: "Website Privacy Policy — Demand Group", description: "How Demand Group processes information when you visit its website." };
 
 export default function WebsitePrivacyPolicy() {
-  return <main className="policy-page"><nav className="policy-nav"><a className="wordmark" href="/"><span className="mark">DG</span><span>Demand Group</span></a><a href="/">Back to studio</a></nav><article className="policy-document">
+  return <main className="policy-page"><nav className="policy-nav"><a className="wordmark" href="/"><img className="brand-logo" src="/demand-group-logo.jpg" alt="Demand Group Italy" width="1280" height="368" /></a><a href="/">Back to studio</a></nav><article className="policy-document">
     <header><p>Demand Group website</p><h1>Website Privacy Policy</h1><p className="policy-date"><strong>Last updated:</strong> 14 August 2026</p></header>
     <p>This notice describes the processing of personal data connected with the Demand Group presentation website, in accordance with Regulation (EU) 2016/679 (GDPR) and applicable Italian privacy law.</p>
     <h2>Data controller</h2><p>The controller is <strong>Demand Group</strong>, an independent studio based in Italy. Privacy enquiries may be sent to <a href="mailto:demandgroup@tuta.io">demandgroup@tuta.io</a>.</p>
