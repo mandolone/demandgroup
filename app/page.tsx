@@ -8,6 +8,30 @@ export const metadata: Metadata = {
     "An independent studio creating uncommon, vintage-inspired watch faces for Wear OS.",
 };
 
+const storeCatalog: Record<string, { package: string; title: string }> = {
+  "ER4": {
+    "package": "r4star",
+    "title": "R4 Star Eastern Europe Watch"
+  },
+  "ARTEMIS": {
+    "package": "artemis2celebration",
+    "title": "Artemis II Moon Phase Digital"
+  },
+  "SPUTNIK": {
+    "package": "sputnik",
+    "title": "Sputnik Animated Watch Face"
+  },
+  "CYBER": {
+    "package": "cyber",
+    "title": "Cyber Mechanica Watch Face"
+  },
+  "GEAR": {
+    "package": "gearweirdo",
+    "title": "GEAR Weirdo Watch Face"
+  }
+};
+const developerStore = "https://play.google.com/store/apps/dev?id=6965957154471594542";
+
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
 export default function Home() {
@@ -21,6 +45,7 @@ export default function Home() {
           <a href="#studio">Studio</a>
           <a href="#collection">Collection</a>
           <a href="#contact">Contact</a>
+          <a href={developerStore} target="_blank" rel="noopener noreferrer">Google Play <Arrow /></a>
         </div>
       </nav>
 
@@ -92,7 +117,7 @@ export default function Home() {
         <header>
           <p>First collection</p>
           <h2>Instruments for a digital wrist.</h2>
-          <span>Launching on Google Play</span>
+          <a href={developerStore} target="_blank" rel="noopener noreferrer">Browse Google Play <Arrow /></a>
         </header>
         <div className="product-grid">
           {[
@@ -104,25 +129,32 @@ export default function Home() {
             { number: "06", name: "GEAR", images: ["gear-smartwatch.png", "gear-campaign.png"], description: "A mechanical dashboard inspired by gears, workshop instruments and layered industrial forms, designed to make everyday information feel tactile.", features: ["Analog time with precision minute register", "Visual battery gauge", "Visual and numeric step counter", "Heart-rate display", "Date and temperature information", "Layered mechanical dial architecture"], provisional: true },
             { number: "07", name: "ZODIAC", images: ["zodiac-smartwatch.png", "zodiac-campaign.png"], description: "An elaborate celestial instrument where zodiac geometry, lunar information and classical astronomy meet in deep blue and gold.", features: ["Analog time with central seconds", "Zodiac ring and constellation display", "Visual lunar phase", "Day and date display", "Weather information", "Additional time indication", "Celestial-inspired night dial"], provisional: true },
             { number: "08", name: "OUTFIT", images: ["outfit-smartwatch.gif", "outfit-campaign.png"], description: "A refined, colour-changing dial created to complement the outfit of the day — from quiet business tailoring to relaxed weekends and elegant evenings.", features: ["Multiple coordinated colour palettes", "One-tap style changes", "Analog time with central seconds", "Date display", "Roman numeral accents", "Designed to complement different outfits and occasions"], provisional: true },
-          ].map(({ number, name, images, description, features, provisional }) => (
-            <details className="product-card" key={name} suppressHydrationWarning>
+          ].sort((a, b) => Number(Boolean(storeCatalog[b.name])) - Number(Boolean(storeCatalog[a.name]))).map(({ number, name, images, description, features, provisional }) => {
+            const store = storeCatalog[name];
+            const galleryImages = store ? [`${store.package}-store.png`, ...images] : images;
+            return (
+            <article className="product-card" key={name}>
+            <details suppressHydrationWarning>
               <summary>
-                <span className={`product-carousel ${images.length > 1 ? "has-slides" : ""}`} aria-label={`${name} image gallery`} tabIndex={images.length > 1 ? 0 : -1}>
-                  {images.map((image, index) => <Image key={image} src={`/products/${image}`} alt={images.length > 1 ? `${name} product image ${index + 1} of ${images.length}` : `${name} watch face`} width={900} height={900} />)}
+                <span className={`product-carousel ${galleryImages.length > 1 ? "has-slides" : ""}`} aria-label={`${name} image gallery`} tabIndex={galleryImages.length > 1 ? 0 : -1}>
+                  {galleryImages.map((image, index) => <Image key={image} src={`/products/${image}`} alt={galleryImages.length > 1 ? `${name} product image ${index + 1} of ${galleryImages.length}` : `${name} watch face`} width={900} height={900} />)}
                 </span>
-                <span className="product-title"><small>DG—{number}</small><strong>{name}</strong>{images.length > 1 ? <span className="slide-hint">Swipe the images →</span> : null}<em>View details +</em></span>
+                <span className="product-title"><small>DG—{number}</small><strong>{store?.title ?? name}</strong>{galleryImages.length > 1 ? <span className="slide-hint">Swipe the images →</span> : null}<em>View details +</em></span>
               </summary>
               <div className="product-details">
                 {provisional ? <p className="provisional-note">Provisional product description · Final specifications to be confirmed</p> : null}
                 <p>{description}</p>
                 {features ? <div className="feature-spec"><h4>Functions at a glance</h4><ul>{features.map(feature => <li key={feature}>{feature}</li>)}</ul></div> : null}
-                <dl><div><dt>Platform</dt><dd>Wear OS</dd></div><div><dt>Features</dt><dd>{features ? `${features.length} ${provisional ? "provisional" : "documented"} functions` : "Full specification coming soon"}</dd></div><div><dt>Status</dt><dd>In development</dd></div></dl>
-                <span className="store-placeholder">Google Play · Coming soon</span>
+                <dl><div><dt>Platform</dt><dd>Wear OS</dd></div><div><dt>Features</dt><dd>{features ? `${features.length} ${provisional ? "provisional" : "documented"} functions` : "Full specification coming soon"}</dd></div><div><dt>Status</dt><dd>{store ? "Available on Google Play" : "Coming soon"}</dd></div></dl>
               </div>
             </details>
-          ))}
+            <div className="product-store-action">
+              {store ? <a className="store-link" href={`https://play.google.com/store/apps/details?id=com.watchfacestudio.${store.package}`} target="_blank" rel="noopener noreferrer" aria-label={`Get ${store.title} on Google Play`}>Get it on Google Play <Arrow /></a> : <span className="store-placeholder">Google Play · Coming soon</span>}
+            </div>
+            </article>
+          );})}
         </div>
-        <p className="collection-disclaimer">Product specifications and Google Play links will be added as each watch face reaches release.</p>
+        <p className="collection-disclaimer">Choose a released watch face to view its price, device compatibility and installation options on Google Play. More designs are coming soon.</p>
       </section>
 
       <section className="wear-os">
@@ -146,15 +178,14 @@ export default function Home() {
       <section className="contact" id="contact">
         <div>
           <p className="section-index">Business & support</p>
-          <h2>The collection is taking shape.</h2>
+          <h2>Find your next watch face.</h2>
         </div>
         <div className="contact-copy">
           <p>
-            Demand Group is preparing its first independent releases for Google
-            Play. Official product links and support contact details will be
-            added here before launch.
+            Explore our released watch faces on Google Play. For installation help,
+            product questions or feedback, contact demandgroup@tuta.io.
           </p>
-          <a href="#top">Return to the beginning ↑</a>
+          <a href={developerStore} target="_blank" rel="noopener noreferrer">Visit the Demand Group store <Arrow /></a>
         </div>
       </section>
 
