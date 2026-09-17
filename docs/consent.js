@@ -19,7 +19,7 @@
   const choose = (choice) => { saveChoice(choice); hide(); };
   banner.querySelector('.cookie-close').addEventListener('click', () => choose('necessary'));
   banner.querySelector('.cookie-reject').addEventListener('click', () => choose('necessary'));
-  banner.querySelector('.cookie-accept').addEventListener('click', () => choose('optional'));
+  banner.querySelector('.cookie-accept').addEventListener('click', () => choose('necessary'));
   banner.querySelector('.cookie-customise').addEventListener('click', (event) => { const panel = banner.querySelector('.cookie-preferences'); const open = panel.classList.toggle('is-open'); event.currentTarget.setAttribute('aria-expanded', String(open)); });
   document.querySelectorAll('[data-cookie-settings]').forEach((button) => button.addEventListener('click', show));
   if (!readChoice()) show();
