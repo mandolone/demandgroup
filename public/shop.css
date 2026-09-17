@@ -22,3 +22,16 @@
 @media(max-width:1050px){.watch-card{grid-template-columns:1fr}.watch-card>.image-open{max-width:280px;margin:auto}.shop-hero{gap:24px}.site-nav nav{gap:18px}}
 @media(max-width:640px){.site-nav{padding:16px 5%;flex-wrap:wrap}.site-nav img{width:165px}.site-nav nav{font-size:14px;gap:16px}.shop-hero{grid-template-columns:1fr;padding:38px 5%}.shop-hero h1{font-size:43px}.lead{font-size:17px}.hero-products{max-width:350px;margin:auto}.hero-actions{gap:10px}.hero-actions a{width:100%}.catalogue{padding:40px 5%}.section-heading{display:block}.section-heading>p{margin-top:20px}.spotlight{grid-template-columns:1fr;padding:22px;gap:24px}.spotlight .image-open{max-width:250px}.watch-grid{grid-template-columns:1fr}.watch-card{padding:22px}.watch-card>.image-open{max-width:290px}.compatibility,.coming,.help,.shop-footer{grid-template-columns:1fr;gap:18px}.studio{padding:55px 6%}.help{padding:50px 6%}.shop-footer{padding:30px 6%}.card-copy h3{font-size:30px}}
 
+/* Actual product first; optional promotional settings second. */
+.product-gallery{min-width:0;max-width:420px;width:100%;margin-inline:auto}
+.gallery-main{aspect-ratio:1;display:grid;align-items:center}
+.gallery-main .image-open{touch-action:pan-y;user-select:none}
+.gallery-main img{width:100%;aspect-ratio:1;object-fit:contain}
+.gallery-thumbs{display:flex;gap:10px;margin-top:14px}
+.gallery-thumb{display:flex;flex-direction:column;align-items:center;gap:5px;width:84px;min-height:44px;padding:5px;background:#15201d;color:#eee;border:1px solid #607268;border-radius:4px;cursor:pointer;font:inherit;font-size:12px}
+.gallery-thumb[aria-pressed=true]{border:2px solid #dfc085;background:#26382f}
+.gallery-thumb img{width:60px;height:60px;object-fit:cover;border-radius:2px}
+.gallery-caption{font-size:13px!important;line-height:1.45;color:#b8c6be!important;margin:12px 0 0}
+.coming-product{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:28px}
+.coming-product .product-gallery{max-width:340px}
+@media(max-width:640px){.coming-product{grid-template-columns:1fr}.product-gallery{max-width:320px}.gallery-thumbs{justify-content:center}}
