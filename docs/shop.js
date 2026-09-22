@@ -11,6 +11,8 @@
      index = (next + choices.length) % choices.length;
      const choice = choices[index];
      main.dataset.image = choice.dataset.src;
+     if (choice.dataset.video) main.dataset.video = choice.dataset.video;
+     else delete main.dataset.video;
      main.querySelector('img').src = choice.dataset.src;
      main.querySelector('img').alt = choice.dataset.caption;
      gallery.querySelector('.gallery-caption').textContent = choice.dataset.caption;
