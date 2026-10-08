@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: "Demand Group — Art, Space & Mechanical Wear OS Watch Faces",
   description:
-    "Explore Wear OS watch faces inspired by space, vintage instruments, mechanics and Japanese art. Discover Kanji Wave, coming soon. Designed in Italy.",
+    "Explore Wear OS watch faces inspired by space, vintage instruments, mechanics and Japanese art. Discover Kanji Wave and Ukiyo Wave, coming soon. Designed in Italy.",
   applicationName: "Demand Group",
   icons: { icon: "/favicon.jpg", shortcut: "/favicon.jpg", apple: "/favicon.jpg" },
   openGraph: {
