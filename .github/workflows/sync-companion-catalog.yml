@@ -1,0 +1,55 @@
+name: Sync companion catalog
+
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/index.html'
+      - 'app/shop-content.ts'
+      - 'scripts/sync_catalog.py'
+      - 'tests/test_catalog.py'
+      - '.github/workflows/sync-companion-catalog.yml'
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: companion-catalog
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test catalog validation and failure handling
+        run: python -m unittest discover -s tests -p 'test_catalog.py' -v
+      - name: Refresh from public Google Play listings
+        run: python scripts/sync_catalog.py
+      - name: Validate published copies
+        run: python scripts/sync_catalog.py --check
+      - name: Commit and publish changed catalog
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- docs/catalog/watchfaces.json public/catalog/watchfaces.json; then
+            echo 'Catalog unchanged.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/catalog/watchfaces.json public/catalog/watchfaces.json
+          git commit -m 'Update companion catalog from Google Play'
+          git push origin HEAD:main
+          # GITHUB_TOKEN pushes do not trigger legacy Pages builds automatically.
+          gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"

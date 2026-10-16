@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-16T09:57:41Z",
+  "apps": [
+    {
+      "packageName": "com.watchfacestudio.artemis2celebration",
+      "title": "Artemis II Moon Phase Digital",
+      "shortDescription": "Digital Wear OS watch face with real Moon phases, forecasts and world time.",
+      "imageUrl": "https://play-lh.googleusercontent.com/hq1Ut1pPyhHG7GHTEUZKw4PX1Oi-DBYDgUGDcFxtKVDUcAdSXozenvteMaVWXIVs8WEOUO4VfkPZpUwUVeeZZQ=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.cyber",
+      "title": "Cyber Mechanica Watch Face",
+      "shortDescription": "Cyber analog Wear OS watch face with weather, steps, heart rate and battery.",
+      "imageUrl": "https://play-lh.googleusercontent.com/4HsTi8Gr2fiKX0OU7uixdnHvSXnw5yMaH92jSIE0pxNT8h0qnTulRbqMhXe5MnaXRAJQpFgPbXkb27I-HOmk=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.gearweirdo",
+      "title": "GEAR Weirdo Watch Face",
+      "shortDescription": "Futuristic mechanical watch face with Regular & Weirdo modes for Wear OS.",
+      "imageUrl": "https://play-lh.googleusercontent.com/YpcxooUkFd89bHVi824P81RvH334CDZhTwnNC3WmGOff_7Kj7TeXkH9mqd7ztn17FHts0SJ_qnIEltV3w7AHDA=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.nihongotimewatch",
+      "title": "Kanji Wave Japanese Watch Face",
+      "shortDescription": "Japanese kanji time, parallax waves, weather and liquid step-goal animation.",
+      "imageUrl": "https://play-lh.googleusercontent.com/XhSDJKAhl8BTygZuSV204Dj2iLLBwV6xR8g0b-9OP3_xlYbwSG78CBHAogWfakeEBJ2tttmUjBm2c-7Jzy0P98w=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.steely",
+      "title": "Outfit: Wear OS Watch Face",
+      "shortDescription": "Elegant analog watch face for Wear OS with 10 colours and useful daily details.",
+      "imageUrl": "https://play-lh.googleusercontent.com/hoi_iOz6gxZd3coaRV2ZXK5QsQO7_8ZCMTJe-ZYtwraSH5ujm1kS59Rir02VGZ074W26hHSuvXxNNqk0S4HOig=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.r4star",
+      "title": "R4 Star Eastern Europe Watch",
+      "shortDescription": "Elegant analog watch face inspired by classic Eastern European design",
+      "imageUrl": "https://play-lh.googleusercontent.com/t0NWvScpU8wcyhbnuoXoKmftIHc8JBGsXO8zOpOdQks5gWUVP9nUS_5IcrwbaHcNqZZ8o7uZbpss5_iFFkX9iQ=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.R5S",
+      "title": "R5S: Soviet Aviator Watch Face",
+      "shortDescription": "Soviet-inspired Wear OS watch face with analog style, step progress and colors.",
+      "imageUrl": "https://play-lh.googleusercontent.com/kgTcp_0XD_16V-8rkSzXt183rU0qwL_4mNAQ2J4Y9UQvt7kzyubz1fT4jkBk9RkRPxZZTnALGEkKOhKoRXhl6g=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.sputnik",
+      "title": "Sputnik Animated Watch Face",
+      "shortDescription": "Animated space watch face with orbiting satellite, weather, steps and calendar.",
+      "imageUrl": "https://play-lh.googleusercontent.com/6_7_rVJElHg3mY5HMEm-yS2drsasIA3Ou_bPSTnI3kXg_dAYyl2yfLGrO0W5uVi0aOfbjTYiM6c293qyuf4vzQ=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.japdigkanjiwave",
+      "title": "Ukiyo Wave Japanese Watch Face",
+      "shortDescription": "Japanese art, Arabic numerals, parallax waves, animated steps and weather.",
+      "imageUrl": "https://play-lh.googleusercontent.com/a4BoJUMisYbr0g8ZJxmQaMUrNSDdYUFQeTGg5oOq_xhn5peGXTgzPLnA1mb_yZhsxAPOfVStStxa1XjsPxw9Lg=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.voyagerdigital",
+      "title": "Voyager Digital Watch Face",
+      "shortDescription": "Animated digital watch face with weather, heart rate, steps and world clock.",
+      "imageUrl": "https://play-lh.googleusercontent.com/cNa3jygBiXaVn36shsRIa25srombYhWOe-qKu47s3CtUTNtor5MGQmyViYxjMHlqDjJorRvEQ8gZmcpmZXgy1A=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.voyageranalog",
+      "title": "Voyager Golden Record Analog",
+      "shortDescription": "Animated analog space watch face with live data and complications.",
+      "imageUrl": "https://play-lh.googleusercontent.com/rwn8VrN8KYAnIoqLcVMZeVK-IeTZKqeU_MADUJiJZBveDzebBimMBQVqf5-bcMUgaLTLWvXAACKMLs-98F6m1Q=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.zodiac10",
+      "title": "Zodiac Astrology Watch Face",
+      "shortDescription": "Astrology watch face with animated zodiac, moon phases and weather for Wear OS.",
+      "imageUrl": "https://play-lh.googleusercontent.com/fkStNzefZiwYA_YsFr0RoKG3k1uWcNW8KVWGcf0RLg1gwKf11DeacRuP6RPduo9oup8Rwsme9Msu-3dtGE9hJg=s512-rw"
+    }
+  ]
+}
