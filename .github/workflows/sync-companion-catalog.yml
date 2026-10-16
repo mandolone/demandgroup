@@ -38,9 +38,8 @@ jobs:
         run: python scripts/sync_catalog.py
       - name: Validate published copies
         run: python scripts/sync_catalog.py --check
-      - name: Commit and publish changed catalog
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Commit changed catalog
+        id: publish
         run: |
           if git diff --quiet -- docs/catalog/watchfaces.json public/catalog/watchfaces.json; then
             echo 'Catalog unchanged.'
@@ -51,5 +50,11 @@ jobs:
           git add docs/catalog/watchfaces.json public/catalog/watchfaces.json
           git commit -m 'Update companion catalog from Google Play'
           git push origin HEAD:main
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+      - name: Publish catalog through GitHub Pages
+        if: steps.publish.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
           # GITHUB_TOKEN pushes do not trigger legacy Pages builds automatically.
           gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
