@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-16T09:57:41Z",
+  "updatedAt": "2026-10-19T04:56:17Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -25,6 +25,18 @@
       "title": "Kanji Wave Japanese Watch Face",
       "shortDescription": "Japanese kanji time, parallax waves, weather and liquid step-goal animation.",
       "imageUrl": "https://play-lh.googleusercontent.com/XhSDJKAhl8BTygZuSV204Dj2iLLBwV6xR8g0b-9OP3_xlYbwSG78CBHAogWfakeEBJ2tttmUjBm2c-7Jzy0P98w=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.lavaorange",
+      "title": "Lava Lamp Orange Watch Face",
+      "shortDescription": "Groovy 60s lava lamp with animated orange lava, weather, steps and heart rate.",
+      "imageUrl": "https://play-lh.googleusercontent.com/dtsPgs1ktPF0ESJqBGQIQX4n21ej3zqIRqflnZxrp7eqoy9UQZbwLybEkPPXGImgi4dx8xBG6b4iPAA2UgrquS4=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.violetlava",
+      "title": "Lava Lamp Retro 60s Watch Face",
+      "shortDescription": "Animated lava lamp, groovy 60s style, daily quotes, steps at a glance.",
+      "imageUrl": "https://play-lh.googleusercontent.com/nzcui8oTOoCf3HsWk-Hfo5mwI2LAYPa6vXv7oe8cc7Uba7_pqdAUJMTKxMmor3OV_OhMdHYqC2sVYivUPpTBUw=s512-rw"
     },
     {
       "packageName": "com.watchfacestudio.steely",
