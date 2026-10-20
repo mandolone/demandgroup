@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-19T04:56:17Z",
+  "updatedAt": "2026-10-20T17:21:41Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -55,6 +55,12 @@
       "title": "R5S: Soviet Aviator Watch Face",
       "shortDescription": "Soviet-inspired Wear OS watch face with analog style, step progress and colors.",
       "imageUrl": "https://play-lh.googleusercontent.com/kgTcp_0XD_16V-8rkSzXt183rU0qwL_4mNAQ2J4Y9UQvt7kzyubz1fT4jkBk9RkRPxZZTnALGEkKOhKoRXhl6g=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.spacesolarflare",
+      "title": "Solar Flare Space Watch Face",
+      "shortDescription": "Animated space watch face with solar flares, Earth, Moon and Big Dipper steps.",
+      "imageUrl": "https://play-lh.googleusercontent.com/32C3eZGT9nQ3cHYqM4DUg1m2Y8HAaJTqtToV5grDpm7UsqfB8Sio5RuboRXZvUaYZQHr7Fx4jwJFArwnPPkY=s512-rw"
     },
     {
       "packageName": "com.watchfacestudio.sputnik",
