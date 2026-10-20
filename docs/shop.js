@@ -25,7 +25,7 @@
        const video = document.createElement('video');
        video.className = 'gallery-motion';
        video.controls = true; video.playsInline = true; video.preload = 'none';
-       video.poster = choice.dataset.src; video.src = choice.dataset.video;
+       video.poster = choice.dataset.src; video.src = video.canPlayType('video/webm; codecs="vp9"') ? choice.dataset.video : choice.dataset.video.replace('-motion-alpha.webm', '-motion.mp4');
        video.setAttribute('aria-label', choice.dataset.caption);
        main.hidden = true; main.parentElement.appendChild(video);
        video.play().catch(() => {});
@@ -69,7 +69,7 @@
    if (button.dataset.video) {
      const video = document.createElement('video');
      video.controls = true; video.preload = 'none'; video.playsInline = true;
-     video.poster = button.dataset.image; video.src = button.dataset.video;
+     video.poster = button.dataset.image; video.src = video.canPlayType('video/webm; codecs="vp9"') ? button.dataset.video : button.dataset.video.replace('-motion-alpha.webm', '-motion.mp4');
      video.style.width = '100%'; dialog.appendChild(video);
    }
    dialog.showModal();

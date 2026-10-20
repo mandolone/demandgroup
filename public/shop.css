@@ -64,3 +64,9 @@
 .product-gallery:has(.motion-thumb) .gallery-thumbs{flex-wrap:nowrap}
 .product-gallery:has(.motion-thumb) .gallery-thumb{flex:1 1 0;width:auto;min-width:0;font-size:11px}
 .motion-thumb span{white-space:normal}
+
+/* Clip the fallback too: white canvas outside the dial must never be visible. */
+.gallery-motion,.zoom video{background:transparent;clip-path:ellipse(49.6% 48.75% at 50% 50%)}
+
+.gallery-motion[src*="sputnik"],.zoom video[src*="sputnik"]{clip-path:ellipse(48.2% 49.2% at 49.6% 49.8%)}
+.gallery-motion[src*="lava"],.zoom video[src*="lava"]{clip-path:circle(49.8% at 50% 50%)}
