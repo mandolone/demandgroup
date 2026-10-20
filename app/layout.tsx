@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: "Demand Group — Art, Space & Mechanical Wear OS Watch Faces",
   description:
-    "Explore Wear OS watch faces inspired by space, vintage instruments, mechanics and Japanese art. Discover Kanji Wave and Ukiyo Wave on Google Play. Designed in Italy.",
+    "Explore Wear OS watch faces inspired by space, vintage instruments, mechanics and Japanese art. Discover Lava Lamp Orange and Retro 60s, plus original watch-face animations. Designed in Italy.",
   applicationName: "Demand Group",
   icons: { icon: "/favicon.jpg", shortcut: "/favicon.jpg", apple: "/favicon.jpg" },
   openGraph: {
