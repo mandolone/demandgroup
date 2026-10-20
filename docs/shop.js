@@ -24,7 +24,7 @@
        document.querySelectorAll('.gallery-motion').forEach(video => video.pause());
        const video = document.createElement('video');
        video.className = 'gallery-motion';
-       video.controls = true; video.playsInline = true; video.preload = 'none';
+       video.controls = false; video.loop = true; video.muted = true; video.defaultMuted = true; video.disablePictureInPicture = true; video.disableRemotePlayback = true; video.playsInline = true; video.preload = 'none';
        video.poster = choice.dataset.src; video.src = video.canPlayType('video/webm; codecs="vp9"') ? choice.dataset.video : choice.dataset.video.replace('-motion-alpha.webm', '-motion.mp4');
        video.setAttribute('aria-label', choice.dataset.caption);
        main.hidden = true; main.parentElement.appendChild(video);
@@ -68,11 +68,12 @@
    dialog.querySelector('video')?.remove();
    if (button.dataset.video) {
      const video = document.createElement('video');
-     video.controls = true; video.preload = 'none'; video.playsInline = true;
+     video.controls = false; video.loop = true; video.muted = true; video.defaultMuted = true; video.disablePictureInPicture = true; video.disableRemotePlayback = true; video.preload = 'none'; video.playsInline = true;
      video.poster = button.dataset.image; video.src = video.canPlayType('video/webm; codecs="vp9"') ? button.dataset.video : button.dataset.video.replace('-motion-alpha.webm', '-motion.mp4');
      video.style.width = '100%'; dialog.appendChild(video);
    }
    dialog.showModal();
+   dialog.querySelector('video')?.play().catch(() => {});
  }));
  dialog.querySelector('button').addEventListener('click', () => dialog.close());
  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });

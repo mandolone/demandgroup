@@ -70,3 +70,7 @@
 
 .gallery-motion[src*="sputnik"],.zoom video[src*="sputnik"]{clip-path:ellipse(48.2% 49.2% at 49.6% 49.8%)}
 .gallery-motion[src*="lava"],.zoom video[src*="lava"]{clip-path:circle(49.8% at 50% 50%)}
+
+.product-gallery .gallery-thumbs-wide,.product-gallery:has(.motion-thumb) .gallery-thumbs-wide{justify-content:flex-start;flex-wrap:wrap;overflow-x:visible}
+.product-gallery .gallery-thumbs-wide .gallery-thumb,.product-gallery:has(.motion-thumb) .gallery-thumbs-wide .gallery-thumb{flex:0 0 calc((100% - 20px)/3);min-width:0;width:auto}
+.gallery-motion[src*="kanji-wave"],.zoom video[src*="kanji-wave"]{clip-path:circle(49.8% at 50% 50%)}
