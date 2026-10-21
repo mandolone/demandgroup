@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-20T17:21:41Z",
+  "updatedAt": "2026-10-21T05:01:55Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -19,6 +19,12 @@
       "title": "GEAR Weirdo Watch Face",
       "shortDescription": "Futuristic mechanical watch face with Regular & Weirdo modes for Wear OS.",
       "imageUrl": "https://play-lh.googleusercontent.com/YpcxooUkFd89bHVi824P81RvH334CDZhTwnNC3WmGOff_7Kj7TeXkH9mqd7ztn17FHts0SJ_qnIEltV3w7AHDA=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.grungemythsrock",
+      "title": "Grunge Rock Watch Face",
+      "shortDescription": "watch face with grunge textures and interchangeable music legend portraits.",
+      "imageUrl": "https://play-lh.googleusercontent.com/vv9S5Ckr1pL4z2Z4bN8MrSJ31avE0YaxBpnYo1OQgcJmPj5pUSG1zHJElatyVarOWajK5H2l_oISCZ22qJO_=s512-rw"
     },
     {
       "packageName": "com.watchfacestudio.nihongotimewatch",
