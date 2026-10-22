@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-21T05:01:55Z",
+  "updatedAt": "2026-10-22T21:46:18Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -95,7 +95,7 @@
     {
       "packageName": "com.watchfacestudio.zodiac10",
       "title": "Zodiac Astrology Watch Face",
-      "shortDescription": "Astrology watch face with animated zodiac, moon phases and weather for Wear OS.",
+      "shortDescription": "Zodiac watch face with a changing ring, constellations and named moon phases",
       "imageUrl": "https://play-lh.googleusercontent.com/fkStNzefZiwYA_YsFr0RoKG3k1uWcNW8KVWGcf0RLg1gwKf11DeacRuP6RPduo9oup8Rwsme9Msu-3dtGE9hJg=s512-rw"
     }
   ]
