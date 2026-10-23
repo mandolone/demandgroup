@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-22T21:46:18Z",
+  "updatedAt": "2026-10-23T11:51:03Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
       "title": "Artemis II Moon Phase Digital",
-      "shortDescription": "Digital Wear OS watch face with real Moon phases, forecasts and world time.",
+      "shortDescription": "A moon phase watch face with digital time, weather forecasts and world time",
       "imageUrl": "https://play-lh.googleusercontent.com/hq1Ut1pPyhHG7GHTEUZKw4PX1Oi-DBYDgUGDcFxtKVDUcAdSXozenvteMaVWXIVs8WEOUO4VfkPZpUwUVeeZZQ=s512-rw"
     },
     {
