@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-23T11:51:03Z",
+  "updatedAt": "2026-10-23T21:31:55Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -71,7 +71,7 @@
     {
       "packageName": "com.watchfacestudio.sputnik",
       "title": "Sputnik Animated Watch Face",
-      "shortDescription": "Animated space watch face with orbiting satellite, weather, steps and calendar.",
+      "shortDescription": "Animated space watch face with orbiting satellite, weather, steps and calendar",
       "imageUrl": "https://play-lh.googleusercontent.com/6_7_rVJElHg3mY5HMEm-yS2drsasIA3Ou_bPSTnI3kXg_dAYyl2yfLGrO0W5uVi0aOfbjTYiM6c293qyuf4vzQ=s512-rw"
     },
     {
@@ -81,16 +81,16 @@
       "imageUrl": "https://play-lh.googleusercontent.com/a4BoJUMisYbr0g8ZJxmQaMUrNSDdYUFQeTGg5oOq_xhn5peGXTgzPLnA1mb_yZhsxAPOfVStStxa1XjsPxw9Lg=s512-rw"
     },
     {
+      "packageName": "com.watchfacestudio.voyageranalog",
+      "title": "Voyager Analog Watch Face",
+      "shortDescription": "Animated analog space watch face with Golden Record art and world time",
+      "imageUrl": "https://play-lh.googleusercontent.com/rwn8VrN8KYAnIoqLcVMZeVK-IeTZKqeU_MADUJiJZBveDzebBimMBQVqf5-bcMUgaLTLWvXAACKMLs-98F6m1Q=s512-rw"
+    },
+    {
       "packageName": "com.watchfacestudio.voyagerdigital",
       "title": "Voyager Digital Watch Face",
       "shortDescription": "Animated digital watch face with weather, heart rate, steps and world clock.",
       "imageUrl": "https://play-lh.googleusercontent.com/cNa3jygBiXaVn36shsRIa25srombYhWOe-qKu47s3CtUTNtor5MGQmyViYxjMHlqDjJorRvEQ8gZmcpmZXgy1A=s512-rw"
-    },
-    {
-      "packageName": "com.watchfacestudio.voyageranalog",
-      "title": "Voyager Golden Record Analog",
-      "shortDescription": "Animated analog space watch face with live data and complications.",
-      "imageUrl": "https://play-lh.googleusercontent.com/rwn8VrN8KYAnIoqLcVMZeVK-IeTZKqeU_MADUJiJZBveDzebBimMBQVqf5-bcMUgaLTLWvXAACKMLs-98F6m1Q=s512-rw"
     },
     {
       "packageName": "com.watchfacestudio.zodiac10",
