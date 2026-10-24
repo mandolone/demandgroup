@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-23T21:31:55Z",
+  "updatedAt": "2026-10-24T11:18:25Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -89,7 +89,7 @@
     {
       "packageName": "com.watchfacestudio.voyagerdigital",
       "title": "Voyager Digital Watch Face",
-      "shortDescription": "Animated digital watch face with weather, heart rate, steps and world clock.",
+      "shortDescription": "Animated digital space watch face with Golden Record art and world time",
       "imageUrl": "https://play-lh.googleusercontent.com/cNa3jygBiXaVn36shsRIa25srombYhWOe-qKu47s3CtUTNtor5MGQmyViYxjMHlqDjJorRvEQ8gZmcpmZXgy1A=s512-rw"
     },
     {
