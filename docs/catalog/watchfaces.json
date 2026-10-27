@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-24T11:18:25Z",
+  "updatedAt": "2026-10-27T22:25:54Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -11,13 +11,13 @@
     {
       "packageName": "com.watchfacestudio.cyber",
       "title": "Cyber Mechanica Watch Face",
-      "shortDescription": "Cyber analog Wear OS watch face with weather, steps, heart rate and battery.",
+      "shortDescription": "Futuristic watch face for Wear OS with weather, steps and three color styles",
       "imageUrl": "https://play-lh.googleusercontent.com/4HsTi8Gr2fiKX0OU7uixdnHvSXnw5yMaH92jSIE0pxNT8h0qnTulRbqMhXe5MnaXRAJQpFgPbXkb27I-HOmk=s512-rw"
     },
     {
       "packageName": "com.watchfacestudio.gearweirdo",
-      "title": "GEAR Weirdo Watch Face",
-      "shortDescription": "Futuristic mechanical watch face with Regular & Weirdo modes for Wear OS.",
+      "title": "GEAR Weirdo Analog Watch Face",
+      "shortDescription": "Mechanical watch face for Wear OS with Weirdo mode that swaps the time scales",
       "imageUrl": "https://play-lh.googleusercontent.com/YpcxooUkFd89bHVi824P81RvH334CDZhTwnNC3WmGOff_7Kj7TeXkH9mqd7ztn17FHts0SJ_qnIEltV3w7AHDA=s512-rw"
     },
     {
@@ -52,14 +52,14 @@
     },
     {
       "packageName": "com.watchfacestudio.r4star",
-      "title": "R4 Star Eastern Europe Watch",
-      "shortDescription": "Elegant analog watch face inspired by classic Eastern European design",
+      "title": "R4 Star Analog Watch Face",
+      "shortDescription": "Vintage analog watch face for Wear OS with gold hands and a distinctive red star",
       "imageUrl": "https://play-lh.googleusercontent.com/t0NWvScpU8wcyhbnuoXoKmftIHc8JBGsXO8zOpOdQks5gWUVP9nUS_5IcrwbaHcNqZZ8o7uZbpss5_iFFkX9iQ=s512-rw"
     },
     {
       "packageName": "com.watchfacestudio.R5S",
-      "title": "R5S: Soviet Aviator Watch Face",
-      "shortDescription": "Soviet-inspired Wear OS watch face with analog style, step progress and colors.",
+      "title": "R5S: Soviet Pilot Watch Face",
+      "shortDescription": "Vintage pilot watch face for Wear OS with step progress and customizable colors",
       "imageUrl": "https://play-lh.googleusercontent.com/kgTcp_0XD_16V-8rkSzXt183rU0qwL_4mNAQ2J4Y9UQvt7kzyubz1fT4jkBk9RkRPxZZTnALGEkKOhKoRXhl6g=s512-rw"
     },
     {
