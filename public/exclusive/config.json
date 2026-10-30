@@ -3,5 +3,15 @@
   "supabasePublishableKey": "",
   "turnstileSiteKey": "",
   "campaign": "",
-  "privacyReady": false
+  "privacyReady": false,
+  "socialLinks": [
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/demand.group/"
+    },
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@DemandWatchfaces"
+    }
+  ]
 }

@@ -4,3 +4,5 @@
 .newsletter-choice{display:flex!important;align-items:flex-start;gap:12px;padding:16px;border:1px solid #526357;background:#17261e;font-size:14px!important;line-height:1.6;cursor:pointer;max-width:720px}.newsletter-choice input[type=checkbox]{display:block;flex:0 0 20px;width:20px;min-height:20px;height:20px;margin:4px 0 0;accent-color:#d4b575}.newsletter-choice span{display:block}.review-invitation{margin-top:28px;padding-top:20px;border-top:1px solid #526357}.review-invitation p{max-width:650px}#newsletter-status{color:#e9cd92}.newsletter-admin{border:1px solid #526357;padding:24px;margin:30px 0}
 
 #partner-experience[hidden],#access-gate[hidden]{display:none!important}
+
+.studio-discovery{margin-top:28px;padding:24px;background:#101c16;border:1px solid #526357}.studio-discovery h3{font-size:28px;line-height:1.15;margin:12px 0 16px}.studio-discovery h4{font-size:20px;margin:26px 0 10px}.studio-socials{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}.studio-discovery p{max-width:640px}

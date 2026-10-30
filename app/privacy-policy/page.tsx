@@ -54,7 +54,7 @@ export default function PrivacyPolicy() {
 
         <h2>Contact</h2>
         <p>If you have any questions regarding this Privacy Policy, you may contact us at:</p>
-        <p><strong>Email:</strong><br /><a href="mailto:demandgroup@tuta.io">demandgroup@tuta.io</a></p>
+        <p><strong>Email:</strong><br /><a href="mailto:demand.group@tuta.io">demand.group@tuta.io</a></p>
       </article>
 
       <footer className="policy-footer">

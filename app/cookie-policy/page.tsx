@@ -12,6 +12,6 @@ export default function CookiePolicy() {
     <h2>Your choice</h2><p>You may confirm the current settings, continue with necessary cookies only, or close the banner without consent. The available options do not restrict access to the website. You can review your choice at any time using <button className="footer-link" type="button" data-cookie-settings>Cookie settings</button>.</p>
     <h2>Browser controls</h2><p>You may also inspect, block or delete cookies in your browser settings. Deleting the preference cookie causes the banner to appear again.</p>
 
-    <h2>Contact</h2><p>For questions, contact <a href="mailto:demandgroup@tuta.io">demandgroup@tuta.io</a>. Additional information is available in the <a href="/website-privacy-policy/">Website Privacy Policy</a>.</p>
+    <h2>Contact</h2><p>For questions, contact <a href="mailto:demand.group@tuta.io">demand.group@tuta.io</a>. Additional information is available in the <a href="/website-privacy-policy/">Website Privacy Policy</a>.</p>
   </article><footer className="policy-footer"><span>© 2026 Demand Group</span><div><a href="/website-privacy-policy/">Website Privacy</a><a href="/privacy-policy/">App Privacy Policy</a></div></footer></main>;
 }
