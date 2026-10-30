@@ -1,8 +1,9 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
+import { resolveAdminKey } from '../_shared/admin-key.mjs';
 import { parseCodes } from '../_shared/csv.mjs';
 
 const url = Deno.env.get('SUPABASE_URL')!;
-const service = createClient(url, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, {auth:{persistSession:false,autoRefreshToken:false}});
+const service = createClient(url, resolveAdminKey((name: string)=>Deno.env.get(name)), {auth:{persistSession:false,autoRefreshToken:false}});
 const origins = (Deno.env.get('EXCLUSIVE_ALLOWED_ORIGINS') || '').split(',').map(s=>s.trim());
 const messages = ['ADMIN_REQUIRED','CAMPAIGN_NOT_FOUND','CAMPAIGN_CLOSED','PARTNER_UNAVAILABLE','WATCHFACE_UNAVAILABLE','VERIFIED_EMAIL_REQUIRED','INVALID_ROW_COUNT','INVALID_EXPIRY','INVALID_CODE_FORMAT','DUPLICATE_CODE','INVALID_STATE','PARTNER_ACCESS_REQUIRED','EXPLICIT_NEWSLETTER_CHOICE_REQUIRED','CONSENT_VERSION_REQUIRED'];
 const publicActions = ['catalog','visit'];

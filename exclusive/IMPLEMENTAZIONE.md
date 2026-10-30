@@ -97,3 +97,7 @@ Valentina e Sara sono esclusivamente le due voci iniziali, non un limite. Il pan
 ## Collegamento al progetto dell’utente
 
 URL Supabase, publishable key e site key Turnstile forniti dall’utente sono stati inseriti nella configurazione pubblica. `privacyReady` resta false e la campagna non è ancora configurata: nessuna attivazione. Verifica reale con la sola publishable key: entrambe le RPC amministrative hanno risposto HTTP 401 / PostgreSQL 42501 (permesso negato). Segreti delle funzioni server preparati solo in un file locale escluso da Git; la secret Turnstile va inserita dall’utente direttamente nel file/pannello, non in chat.
+
+## Distribuzione manuale dall’editor Supabase
+
+`scripts/package-exclusive-functions.mjs` prepara due file autocontenuti in `work/supabase-setup`, esclusi da Git, da incollare nei rispettivi `index.ts` dell’editor Dashboard. Mantiene le annotazioni TypeScript, incorpora soltanto i piccoli helper e conserva le dipendenze npm esplicite. Le credenziali server vengono risolte dalle nuove `SUPABASE_SECRET_KEYS` automatiche, con compatibilità per il runtime legacy `SUPABASE_SERVICE_ROLE_KEY`; nessuna chiave server deve essere copiata nel codice. Entrambe le versioni canoniche e quelle preparate per l’editor sono state verificate con Deno check. Test dedicati verificano precedenza delle chiavi moderne, compatibilità legacy e errore senza divulgazione dei valori se non sono disponibili credenziali server.
