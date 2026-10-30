@@ -26,7 +26,7 @@ test('PostgreSQL campaign integration and security',async t=>{
  await server.initialise();await server.start();db=server.getPgClient();await db.connect();
  const cfg=db.connectionParameters;pool=new pg.Pool({host:'127.0.0.1',port:cfg.port,user:cfg.user,password:cfg.password,database:cfg.database,max:20});
  await db.query("create role anon;create role authenticated;create role service_role;create schema auth;create table auth.users(id uuid primary key,email text,email_confirmed_at timestamptz,is_anonymous boolean default false)");
- for(const file of ['202610300001_exclusive.sql','202610300002_catalog.sql','202610300003_newsletter.sql','202610300004_partner_access.sql'])await db.query(await readFile('supabase/migrations/'+file,'utf8'));
+ for(const file of ['202610300001_exclusive.sql','202610300002_catalog.sql','202610300003_newsletter.sql','202610300004_partner_access.sql','202610300005_continuing_program.sql'])await db.query(await readFile('supabase/migrations/'+file,'utf8'));
  for(const [i,id] of ids.entries())await db.query('insert into auth.users(id,email,email_confirmed_at) values($1,$2,now())',[id,`fixture-${i}@example.invalid`]);
  await db.query('insert into exclusive_private.admins values($1)',[ids[0]]);
  await db.query("insert into exclusive_private.campaigns(id,slug,name,active,ends_at) values($1,'test-campaign','Synthetic test only',true,now()+interval '2 days')",[campaign]);
@@ -40,7 +40,7 @@ test('PostgreSQL campaign integration and security',async t=>{
      await assert.rejects(()=>call(action,{partner:'valentina',watchface:'sputnik'},ids[32]),/PARTNER_ACCESS_REQUIRED/);
      await assert.rejects(()=>call(action,{partner:'valentina',watchface:'sputnik',access:'a'.repeat(64)},ids[32]),/PARTNER_ACCESS_REQUIRED/);
    }
-   const result=await call('catalog',{partner:'valentina',access:accessKeys.valentina},null);assert.equal(result.partner,'Valentina');
+   const result=await call('catalog',{partner:'valentina',access:accessKeys.valentina},null);assert.equal(result.partner,'Paradise Beach Camper');
    await assert.rejects(()=>call('catalog',{partner:'valentina',access:accessKeys.sara}),/PARTNER_ACCESS_REQUIRED/);
  });
  await t.test('private QR: only administrators issue links, DB stores hashes, snapshots never expose raw keys',async()=>{
@@ -112,7 +112,7 @@ test('PostgreSQL campaign integration and security',async t=>{
      assert.equal(assignment.assignments[0].partner,partner);
      assert.equal(assignment.assignments[0].code,`DYNAMICVENUE${i}PROMO`);
    }
-   const snapshot=await call('admin_snapshot');assert.equal(snapshot.partners.length,12);assert.equal(snapshot.access_links.length,12);
+   const snapshot=await call('admin_snapshot');assert.equal(snapshot.partners.length,14);assert.equal(snapshot.access_links.length,12);
    const recovered=await claim(ids[33],'sara');assert.equal(recovered.assignments.length,1);assert.equal(recovered.assignments[0].partner,'test-venue-0');
    await assert.rejects(()=>call('catalog',{partner:'test-venue-1',access:accessKeys['test-venue-0']}),/PARTNER_ACCESS_REQUIRED/);
    await call('admin_partner',{id:'test-venue-0',name:'Renamed synthetic venue',active:false});
@@ -121,16 +121,34 @@ test('PostgreSQL campaign integration and security',async t=>{
    await call('admin_partner',{id:'test-venue-0',name:'Renamed synthetic venue',active:true});
    assert.equal((await call('catalog',{partner:'test-venue-0',access:accessKeys['test-venue-0']})).partner,'Renamed synthetic venue');
  });
+ await t.test('continuing program: no end date, permanent revocable QR, fresh stock and one-gift rule after Auth retention',async()=>{
+   await call('admin_campaign',{active:true,user_limit:1,starts_at:new Date(Date.now()-3600000).toISOString(),ends_at:null,retention_days:90});
+   const qr=await call('admin_access_create',{partner:'valentina'});accessKeys.valentina=qr.access;assert.equal(qr.expires_at,null);
+   const catalog=await call('catalog',{partner:'valentina',access:qr.access},null);assert.equal(catalog.ends_at,null);
+   await batch('valentina','zodiac10',['CONTINUINGCODE001']);
+   const first=await claim(ids[44],'valentina','zodiac10');assert.equal(first.assignments.length,1);
+   const views=(await call('admin_snapshot')).events.filter(e=>e.kind==='visit').reduce((n,e)=>n+Number(e.total),0);
+   await call('visit',{partner:'valentina',access:qr.access,session_id:randomUUID()},null);
+   assert.equal((await call('admin_snapshot')).events.filter(e=>e.kind==='visit').reduce((n,e)=>n+Number(e.total),0),views+1);
+   await db.query("update exclusive_private.identities set last_seen_at=now()-interval '91 days' where user_id=$1",[ids[44]]);
+   const queue=(await db.query('select public.exclusive_cleanup() as users')).rows[0].users;assert.ok(queue.includes(ids[44]));assert.ok(!queue.includes(ids[0]));
+   const saved=(await db.query('select a.code_id,i.user_id from exclusive_private.assignments a join exclusive_private.identities i on i.id=a.identity_id where a.code_id=(select id from exclusive_private.codes where code=$1)',[first.assignments[0].code])).rows[0];assert.equal(saved.user_id,null);
+   await db.query('delete from auth.users where id=$1',[ids[44]]);await db.query('select public.exclusive_cleanup_done($1)',[ids[44]]);
+   const returning=randomUUID();await db.query('insert into auth.users(id,email,email_confirmed_at) values($1,$2,now())',[returning,'fixture-44@example.invalid']);
+   const recovered=await claim(returning,'sara');assert.equal(recovered.assignments.length,1);assert.equal(recovered.assignments[0].code,first.assignments[0].code);
+   const snapshot=await call('admin_snapshot');assert.equal(snapshot.partners.find(p=>p.id==='sara').name,'Scubadiving');assert.equal(snapshot.partners.find(p=>p.id==='valentina').name,'Paradise Beach Camper');assert.equal(snapshot.partners.find(p=>p.id==='barbiere').active,false);assert.equal(snapshot.partners.find(p=>p.id==='ottico').active,false);
+   await call('admin_campaign',{active:true,user_limit:1,starts_at:new Date(Date.now()-3600000).toISOString(),ends_at:new Date(Date.now()+172800000).toISOString(),retention_days:90});
+ });
  await t.test('private QR: revocation, replacement and expiry block old keys and preserve other partner links',async()=>{
    const old=accessKeys.sara;
    await call('admin_access_revoke',{partner:'sara'});
    await assert.rejects(()=>call('catalog',{partner:'sara',access:old}),/PARTNER_ACCESS_REQUIRED/);
    await assert.rejects(()=>call('claim',{partner:'sara',access:old,watchface:'sputnik'},ids[2]),/PARTNER_ACCESS_REQUIRED/);
    assert.equal((await call('mine',{},ids[2])).assignments.length,1);
-   assert.equal((await call('catalog',{partner:'valentina',access:accessKeys.valentina})).partner,'Valentina');
+   assert.equal((await call('catalog',{partner:'valentina',access:accessKeys.valentina})).partner,'Paradise Beach Camper');
    const next=await call('admin_access_create',{partner:'sara'});accessKeys.sara=next.access;assert.notEqual(next.access,old);
    await assert.rejects(()=>call('catalog',{partner:'sara',access:old}),/PARTNER_ACCESS_REQUIRED/);
-   assert.equal((await call('catalog',{partner:'sara',access:next.access})).partner,'Sara');
+   assert.equal((await call('catalog',{partner:'sara',access:next.access})).partner,'Scubadiving');
    await db.query("update exclusive_private.partner_access set expires_at=now()-interval '1 second' where partner_id='sara'");
    await assert.rejects(()=>call('catalog',{partner:'sara',access:next.access}),/PARTNER_ACCESS_REQUIRED/);
  });
