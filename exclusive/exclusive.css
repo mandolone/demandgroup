@@ -6,3 +6,12 @@
 #partner-experience[hidden],#access-gate[hidden]{display:none!important}
 
 .studio-discovery{margin-top:28px;padding:24px;background:#101c16;border:1px solid #526357}.studio-discovery h3{font-size:28px;line-height:1.15;margin:12px 0 16px}.studio-discovery h4{font-size:20px;margin:26px 0 10px}.studio-socials{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}.studio-discovery p{max-width:640px}
+
+/* Native button defaults must not introduce a white background on the dark desk. */
+.exclusive button.secondary,dialog button.secondary{background:#18271f;color:#f3ead7;border-color:#cbb277}
+.exclusive button.secondary:hover:not(:disabled),dialog button.secondary:hover:not(:disabled){background:#304638;border-color:#e1c48a;color:#fff8e9}
+.exclusive button:focus-visible,dialog button:focus-visible{outline:3px solid #f0cd83;outline-offset:3px}
+.exclusive button:disabled,dialog button:disabled{opacity:1;background:#202923;color:#aeb8af;border-color:#536156}
+.private-qr-preview{margin:18px 0;padding:18px;border:1px solid #617261;background:#0b130f;border-radius:4px}
+.private-qr-preview img{display:block;width:240px;max-width:100%;height:auto;background:#fff;border-radius:3px}
+.private-qr-preview figcaption{max-width:40ch;margin-top:12px;color:#dbe5d8;font-size:14px;line-height:1.5}
