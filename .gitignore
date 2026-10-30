@@ -38,3 +38,10 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+
+# Promotional inventory must never be committed or served.
+*.csv
+/private-imports/
+/exclusive/qr-output/
+/local-postgres/
+/exclusive/anteprima*.png

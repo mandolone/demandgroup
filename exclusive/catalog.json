@@ -1,0 +1,100 @@
+[
+  {
+    "id": "artemis2celebration",
+    "package_name": "com.watchfacestudio.artemis2celebration",
+    "name": "Artemis II Moon Phase Digital",
+    "description": "A moon phase watch face with digital time, weather forecasts and world time",
+    "image": "/products/artemis2celebration-verified.webp"
+  },
+  {
+    "id": "cyber",
+    "package_name": "com.watchfacestudio.cyber",
+    "name": "Cyber Mechanica Watch Face",
+    "description": "Futuristic watch face for Wear OS with weather, steps and three color styles",
+    "image": "/products/cyber-verified.webp"
+  },
+  {
+    "id": "gearweirdo",
+    "package_name": "com.watchfacestudio.gearweirdo",
+    "name": "GEAR Weirdo Analog Watch Face",
+    "description": "Mechanical watch face for Wear OS with Weirdo mode that swaps the time scales",
+    "image": "/products/gearweirdo-verified.webp"
+  },
+  {
+    "id": "lavaorange",
+    "package_name": "com.watchfacestudio.lavaorange",
+    "name": "Lava Lamp Orange Watch Face",
+    "description": "Groovy 60s lava lamp with animated orange lava, weather, steps and heart rate.",
+    "image": "/products/lavaorange-verified.webp"
+  },
+  {
+    "id": "violetlava",
+    "package_name": "com.watchfacestudio.violetlava",
+    "name": "Lava Lamp Retro 60s Watch Face",
+    "description": "Animated lava lamp, groovy 60s style, daily quotes, steps at a glance.",
+    "image": "/products/violetlava-verified.webp"
+  },
+  {
+    "id": "r4star",
+    "package_name": "com.watchfacestudio.r4star",
+    "name": "R4 Star Analog Watch Face",
+    "description": "Vintage analog watch face for Wear OS with gold hands and a distinctive red star",
+    "image": "/products/r4star-verified.webp"
+  },
+  {
+    "id": "R5S",
+    "package_name": "com.watchfacestudio.R5S",
+    "name": "R5S: Soviet Pilot Watch Face",
+    "description": "Vintage pilot watch face for Wear OS with step progress and customizable colors",
+    "image": "/products/R5S-verified.webp"
+  },
+  {
+    "id": "sputnik",
+    "package_name": "com.watchfacestudio.sputnik",
+    "name": "Sputnik Animated Watch Face",
+    "description": "Animated space watch face with orbiting satellite, weather, steps and calendar",
+    "image": "/products/sputnik-verified.webp"
+  },
+  {
+    "id": "voyageranalog",
+    "package_name": "com.watchfacestudio.voyageranalog",
+    "name": "Voyager Analog Watch Face",
+    "description": "Animated analog space watch face with Golden Record art and world time",
+    "image": "/products/voyager-analog-verified.webp"
+  },
+  {
+    "id": "voyagerdigital",
+    "package_name": "com.watchfacestudio.voyagerdigital",
+    "name": "Voyager Digital Watch Face",
+    "description": "Animated digital space watch face with Golden Record art and world time",
+    "image": "/products/voyager-digital-verified.webp"
+  },
+  {
+    "id": "zodiac10",
+    "package_name": "com.watchfacestudio.zodiac10",
+    "name": "Zodiac Astrology Watch Face",
+    "description": "Zodiac watch face with a changing ring, constellations and named moon phases",
+    "image": "/products/zodiac10-verified.webp"
+  },
+  {
+    "id": "outfit",
+    "package_name": "com.watchfacestudio.steely",
+    "name": "Outfit: Wear OS Watch Face",
+    "description": "Elegant analog watch face for Wear OS with 10 colours and useful daily details.",
+    "image": "/products/outfit-preview.webp"
+  },
+  {
+    "id": "kanji-wave",
+    "package_name": "com.watchfacestudio.nihongotimewatch",
+    "name": "Kanji Wave Japanese Watch Face",
+    "description": "Japanese kanji time, parallax waves, weather and liquid step-goal animation.",
+    "image": "/products/kanji-wave-blue.png"
+  },
+  {
+    "id": "ukiyo-wave",
+    "package_name": "com.watchfacestudio.japdigkanjiwave",
+    "name": "Ukiyo Wave Japanese Watch Face",
+    "description": "Japanese art, Arabic numerals, parallax waves, animated steps and weather.",
+    "image": "/products/ukiyo-wave-blue.png"
+  }
+]
