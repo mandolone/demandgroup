@@ -1,7 +1,7 @@
 project_id = "demandgroup-exclusive"
 
 [functions.exclusive-api]
-# Catalog is public. Each protected action validates its bearer JWT with auth.getUser().
+# Anonymous catalog actions require private partner access; protected actions validate the bearer JWT with auth.getUser().
 verify_jwt = false
 
 [functions.exclusive-cleanup]

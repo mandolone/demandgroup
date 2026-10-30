@@ -93,3 +93,7 @@ Esito dell’aggiornamento accesso QR: 32 controlli Exclusive + 5 rendering rout
 ## Partner aggiuntivi
 
 Valentina e Sara sono esclusivamente le due voci iniziali, non un limite. Il pannello consente di creare, modificare e disattivare ulteriori strutture senza cambiare l’applicazione; ciascuna riceve QR, scorte e statistiche separati. La quantità iniziale 25 è modificabile per ogni importazione. Il limite per email è globale sulla campagna anche se si aggiungono strutture. Test PostgreSQL: aggiunte altre dieci strutture sintetiche (totale dodici), con emissione QR, importazione e assegnazione isolate, modifica/disattivazione e recupero globale verificati. I partner sintetici esistono solo nel database di test temporaneo e non vengono inseriti nell’installazione reale.
+
+## Collegamento al progetto dell’utente
+
+URL Supabase, publishable key e site key Turnstile forniti dall’utente sono stati inseriti nella configurazione pubblica. `privacyReady` resta false e la campagna non è ancora configurata: nessuna attivazione. Verifica reale con la sola publishable key: entrambe le RPC amministrative hanno risposto HTTP 401 / PostgreSQL 42501 (permesso negato). Segreti delle funzioni server preparati solo in un file locale escluso da Git; la secret Turnstile va inserita dall’utente direttamente nel file/pannello, non in chat.
