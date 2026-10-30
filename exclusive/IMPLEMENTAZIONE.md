@@ -22,7 +22,7 @@ Il repository mantiene anche sorgenti React 19 / Vinext 1 beta, Vite 8 e uno sch
 ## Configurazione esterna, nell’ordine
 
 1. Creare o selezionare un progetto **Supabase dedicato alla promozione**, preferibilmente nella regione scelta dal titolare. I suoi account non devono essere usati da servizi estranei: il cleanup elimina gli account di promozione scaduti, esclusi gli amministratori.
-2. Con Supabase CLI autenticata e collegata al progetto, applicare `supabase db push`. Sono presenti due migrazioni ordinate in `supabase/migrations/`. Non applicare `setup/bootstrap.sql` come migrazione: contiene segnaposto deliberati.
+2. Con Supabase CLI autenticata e collegata al progetto, applicare `supabase db push`. Sono presenti tre migrazioni ordinate in `supabase/migrations/`. Non applicare `setup/bootstrap.sql` come migrazione: contiene segnaposto deliberati.
 3. In Authentication abilitare provider Email; usare OTP senza password, disabilitare anonymous sign-in e altri provider non necessari. Modificare il template Magic Link per includere **`{{ .Token }}`**, non un link; usare un codice di 6–10 cifre. Configurare SMTP reale, sender verificato, scadenza OTP e limiti di invio/validazione. Prima del lancio controllare la consegna sia a nuovi utenti sia agli utenti già registrati.
 4. Creare widget Cloudflare Turnstile per `demandgroup.smokeandthink.com`. Abilitare CAPTCHA nelle impostazioni Supabase Auth con la relativa chiave segreta. Impostare anche le variabili server elencate in `supabase/secrets.example` con `supabase secrets set --env-file <file-privato.env>`. Per staging aggiungere esplicitamente il suo origin/hostname; non usare wildcard. Non inserire mai service-role key o chiavi segrete nei file pubblici.
 5. Distribuire **solo dopo autorizzazione** `supabase functions deploy exclusive-api` e `supabase functions deploy exclusive-cleanup`. Le funzioni hanno `verify_jwt=false` perché la prima include azioni pubbliche e verifica i JWT per ogni azione protetta; la seconda richiede un segreto indipendente. Le RPC DB restano invocabili solo dal service role. CORS non è la barriera di autenticazione.
@@ -60,3 +60,12 @@ Il precedente test `rendered-html.test.mjs` verificava ancora lo scheletro inizi
 - Anteprima via browser: verificati impaginazione mobile e desktop, schede reali, dialogo di recupero e accesso al pannello bloccato fino alla configurazione.
 - `npm audit --omit=dev`: nessuna vulnerabilità. Audit completo del template: 27 avvisi nelle dipendenze di sviluppo (18 high, 8 moderate, 1 low); nessun aggiornamento generale del framework eseguito in questa modifica.
 - QR PNG e SVG distinti, PNG 1600×1600, verificati presenti nel volume Deposito montato: `/Volumes/Deposito/OROLOGI SAMSUNG/materiale per SOCIAL/2026-10-30-exclusive-partner-qr-v01`. La stessa cartella contiene anteprima e testi EN/IT, esplicitamente di pre-lancio.
+
+
+## Aggiornamento: recensioni e newsletter opzionale
+
+L’invito alla recensione sincera compare dopo l’assegnazione, senza condizioni o ricompense legate alla recensione. La newsletter ha un checkbox separato non preselezionato, consenso persistito solo per l’email verificata con testo/versione e timestamp server. Preferenze modificabili anche senza richiedere un codice, esportazione amministrativa delle sole adesioni attive e delle revoche da applicare nel servizio newsletter. La terza migrazione aggiunge tabelle e RPC private per questi dati. La funzione di cleanup aggiornata deve essere ridistribuita insieme all’API; la lista newsletter ha conservazione separata dalla campagna.
+
+Non sono state collegate API marketing o spedite newsletter: l’operatore esporta CSV e usa Mailchimp (o, dopo aggiornamento privacy, Brevo). Prima di ogni invio deve allineare le revoche del sito e rispettare le disiscrizioni già presenti nel provider. Piano gratuito, quote attuali e guida pratica: [AVVIO_GRATUITO.md](AVVIO_GRATUITO.md).
+
+Verifica dell’aggiornamento newsletter: `npm test` supera 28 controlli Exclusive e 5 rendering route. Deno check supera entrambe le funzioni aggiornate. Le prove newsletter coprono assenza del consenso predefinito, email verificata, scelta esplicita/versione valida, indipendenza dai codici, idempotenza, accesso amministrativo agli export, revoca e scadenza/conservazione. Nessuna email inviata e nessun account marketing collegato.

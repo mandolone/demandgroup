@@ -4,9 +4,9 @@ import { parseCodes } from '../_shared/csv.mjs';
 const url = Deno.env.get('SUPABASE_URL')!;
 const service = createClient(url, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, {auth:{persistSession:false,autoRefreshToken:false}});
 const origins = (Deno.env.get('EXCLUSIVE_ALLOWED_ORIGINS') || '').split(',').map(s=>s.trim());
-const messages = ['ADMIN_REQUIRED','CAMPAIGN_NOT_FOUND','CAMPAIGN_CLOSED','PARTNER_UNAVAILABLE','WATCHFACE_UNAVAILABLE','VERIFIED_EMAIL_REQUIRED','INVALID_ROW_COUNT','INVALID_EXPIRY','INVALID_CODE_FORMAT','DUPLICATE_CODE','INVALID_STATE'];
+const messages = ['ADMIN_REQUIRED','CAMPAIGN_NOT_FOUND','CAMPAIGN_CLOSED','PARTNER_UNAVAILABLE','WATCHFACE_UNAVAILABLE','VERIFIED_EMAIL_REQUIRED','INVALID_ROW_COUNT','INVALID_EXPIRY','INVALID_CODE_FORMAT','DUPLICATE_CODE','INVALID_STATE','EXPLICIT_NEWSLETTER_CHOICE_REQUIRED','CONSENT_VERSION_REQUIRED'];
 const publicActions = ['catalog','visit'];
-const allowedActions = [...publicActions,'mine','claim','admin_snapshot','admin_partner','admin_campaign','admin_watchface','admin_import','admin_code_state'];
+const allowedActions = [...publicActions,'mine','claim','admin_snapshot','admin_partner','admin_campaign','admin_watchface','admin_import','admin_code_state','newsletter_status','newsletter_set','admin_newsletter_export','admin_newsletter_withdrawals'];
 
 async function digest(value: string) {
  const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(Deno.env.get('EXCLUSIVE_RATE_SECRET')!),{name:'HMAC',hash:'SHA-256'},false,['sign']);
@@ -44,7 +44,7 @@ Deno.serve(async req=>{
    const {data,error}=await service.auth.getUser(token);
    if(error||!data.user?.email_confirmed_at||data.user.is_anonymous) return reply({error:'VERIFIED_EMAIL_REQUIRED'},401);
    actor=data.user.id;
-   const userRate=await service.rpc('exclusive_rate_limit',{p_key:await digest(`user:${actor}:${action}`),p_limit:action==='claim'?12:120,p_seconds:300});
+   const userRate=await service.rpc('exclusive_rate_limit',{p_key:await digest(`user:${actor}:${action}`),p_limit:['claim','newsletter_set'].includes(action)?12:120,p_seconds:300});
    if(userRate.error) return reply({error:'SERVICE_UNAVAILABLE'},503);
    if(!userRate.data) return reply({error:'TOO_MANY_REQUESTS'},429);
   }
@@ -62,7 +62,7 @@ Deno.serve(async req=>{
    try{input.codes=parseCodes(input.csv);}catch{return reply({error:'INVALID_CSV'},400);}
    delete input.csv;
   }
-  const {data,error}=await service.rpc('exclusive_api',{p_action:action,p_input:input,p_actor:actor});
+  const {data,error}=await service.rpc(action.startsWith('newsletter_')||action.startsWith('admin_newsletter_')?'exclusive_newsletter':'exclusive_api',{p_action:action,p_input:input,p_actor:actor});
   if(error){const safe=messages.find(m=>error.message.includes(m));return reply({error:safe||'REQUEST_FAILED'},safe==='ADMIN_REQUIRED'?403:400);}
   return reply(data);
  }catch{return reply({error:'REQUEST_FAILED'},400);}

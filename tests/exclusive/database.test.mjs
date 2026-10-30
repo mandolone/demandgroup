@@ -17,13 +17,15 @@ async function call(action,input={},actor=ids[0],client=db){return (await client
 const expires=new Date(Date.now()+86400000).toISOString();
 async function batch(partner,face,codes,extra={}){return call('admin_import',{import_id:randomUUID(),partner,watchface:face,codes,expected_rows:codes.length,expires_at:expires,...extra});}
 const claim=(user,partner='valentina',watchface='sputnik',client=db)=>call('claim',{partner,watchface},user,client);
+const consentVersion='monthly-watchfaces-2026-10-30-v1';
+async function newsletter(action,input={},actor=ids[0]){return (await db.query('select public.exclusive_newsletter($1,$2,$3) as data',[action,{campaign:'test-campaign',...input},actor])).rows[0].data;}
 
 test('PostgreSQL campaign integration and security',async t=>{
  try{
  await server.initialise();await server.start();db=server.getPgClient();await db.connect();
  const cfg=db.connectionParameters;pool=new pg.Pool({host:'127.0.0.1',port:cfg.port,user:cfg.user,password:cfg.password,database:cfg.database,max:20});
  await db.query("create role anon;create role authenticated;create role service_role;create schema auth;create table auth.users(id uuid primary key,email text,email_confirmed_at timestamptz,is_anonymous boolean default false)");
- for(const file of ['202610300001_exclusive.sql','202610300002_catalog.sql'])await db.query(await readFile('supabase/migrations/'+file,'utf8'));
+ for(const file of ['202610300001_exclusive.sql','202610300002_catalog.sql','202610300003_newsletter.sql'])await db.query(await readFile('supabase/migrations/'+file,'utf8'));
  for(const [i,id] of ids.entries())await db.query('insert into auth.users(id,email,email_confirmed_at) values($1,$2,now())',[id,`fixture-${i}@example.invalid`]);
  await db.query('insert into exclusive_private.admins values($1)',[ids[0]]);
  await db.query("insert into exclusive_private.campaigns(id,slug,name,active,ends_at) values($1,'test-campaign','Synthetic test only',true,now()+interval '2 days')",[campaign]);
@@ -44,6 +46,45 @@ test('PostgreSQL campaign integration and security',async t=>{
  await t.test('global uniqueness, RLS, stable attribution and no identity in aggregate snapshot',async()=>{const a=await call('admin_snapshot');assert.ok(a.events.some(e=>e.partner_id==='valentina'&&e.kind==='assigned'));assert.doesNotMatch(JSON.stringify(a),/@example|VALENTINA0|SARACODE/);assert.equal((await db.query("select count(*) from pg_tables where schemaname='exclusive_private' and not rowsecurity")).rows[0].count,'0');await assert.rejects(()=>db.query("insert into exclusive_private.codes(code,campaign_id,partner_id,watchface_id,import_id,expires_at) select code,campaign_id,partner_id,watchface_id,import_id,expires_at from exclusive_private.codes limit 1"),/unique constraint/);});
  await t.test('changing verified email on the same account cannot reset the limit',async()=>{const a=await claim(ids[1]);await db.query("update auth.users set email='changed@example.invalid' where id=$1",[ids[1]]);assert.equal((await claim(ids[1],'sara')).assignments[0].code,a.assignments[0].code);});
  await t.test('atomic rate limiting and expiry recovery',async()=>{assert.equal((await db.query("select exclusive_rate_limit('test',2,60) as ok")).rows[0].ok,true);await db.query("select exclusive_rate_limit('test',2,60)");assert.equal((await db.query("select exclusive_rate_limit('test',2,60) as ok")).rows[0].ok,false);});
+ await t.test('newsletter: no opt-in by default; verified email and explicit current consent required',async()=>{
+   assert.equal((await newsletter('newsletter_status',{},ids[30])).subscribed,false);
+   await assert.rejects(()=>newsletter('newsletter_set',{enabled:true,consent_version:consentVersion},null),/VERIFIED_EMAIL_REQUIRED/);
+   await assert.rejects(()=>newsletter('newsletter_set',{enabled:true,consent_version:consentVersion},ids[25]),/VERIFIED_EMAIL_REQUIRED/);
+   await assert.rejects(()=>newsletter('newsletter_set',{consent_version:consentVersion},ids[30]),/EXPLICIT_NEWSLETTER_CHOICE_REQUIRED/);
+   await assert.rejects(()=>newsletter('newsletter_set',{enabled:true},ids[30]),/CONSENT_VERSION_REQUIRED/);
+   assert.equal((await newsletter('admin_newsletter_export')).contacts.length,0);
+ });
+ await t.test('newsletter: consent is independent of claims, idempotent and traceable',async()=>{
+   assert.equal((await newsletter('newsletter_set',{enabled:true,consent_version:consentVersion,partner:'sara'},ids[30])).subscribed,true);
+   const first=(await newsletter('admin_newsletter_export')).contacts;
+   assert.equal(first.length,1);assert.equal(first[0].email,'fixture-30@example.invalid');assert.equal(first[0].source_partner,'sara');assert.ok(first[0].verified_at);assert.ok(first[0].consent_text.includes('optional'));
+   await newsletter('newsletter_set',{enabled:true,consent_version:consentVersion,partner:'valentina'},ids[30]);
+   assert.deepEqual((await newsletter('admin_newsletter_export')).contacts,first);
+   assert.equal((await db.query("select count(*) from exclusive_private.newsletter_consent_events where event='subscribed'")).rows[0].count,'1');
+   assert.deepEqual((await call('mine',{},ids[30])).assignments,[]);
+   const c=await claim(ids[31],'sara');assert.equal(c.assignments.length,1);assert.equal((await newsletter('newsletter_status',{},ids[31])).subscribed,false);
+ });
+ await t.test('newsletter: users cannot export other emails; anonymous clients cannot call RPC/read tables',async()=>{
+   await assert.rejects(()=>newsletter('admin_newsletter_export',{},ids[30]),/ADMIN_REQUIRED/);
+   await assert.rejects(()=>newsletter('admin_newsletter_withdrawals',{},ids[30]),/ADMIN_REQUIRED/);
+   await db.query('set role anon');await assert.rejects(()=>db.query("select public.exclusive_newsletter('newsletter_status')"),/permission denied/);await assert.rejects(()=>db.query('select * from exclusive_private.newsletter_subscriptions'),/permission denied/);await db.query('reset role');
+ });
+ await t.test('newsletter: withdrawal removes email from subscriber export and preserves the assigned code',async()=>{
+   const code=(await call('mine',{},ids[31])).assignments[0].code;
+   await newsletter('newsletter_set',{enabled:true,consent_version:consentVersion},ids[31]);
+   await newsletter('newsletter_set',{enabled:false},ids[31]);
+   assert.equal((await newsletter('newsletter_status',{},ids[31])).subscribed,false);
+   assert.equal((await newsletter('admin_newsletter_export')).contacts.length,1);
+   assert.equal((await newsletter('admin_newsletter_withdrawals')).contacts[0].email,'fixture-31@example.invalid');
+   assert.equal((await call('mine',{},ids[31])).assignments[0].code,code);
+ });
+ await t.test('newsletter: expiry excludes contacts immediately; cleanup removes withdrawn email after 30 days',async()=>{
+   await db.query("update exclusive_private.newsletter_subscriptions set expires_at=now()-interval '31 days' where withdrawn_at is null");
+   assert.equal((await newsletter('admin_newsletter_export')).contacts.length,0);
+   await db.query('select public.exclusive_newsletter_cleanup()');
+   assert.equal((await db.query("select count(*) from exclusive_private.newsletter_subscriptions where email='fixture-30@example.invalid'")).rows[0].count,'0');
+   const remaining=(await newsletter('admin_newsletter_withdrawals')).contacts;assert.equal(remaining.length,1);assert.equal(remaining[0].email,'fixture-31@example.invalid');
+ });
  await t.test('retention cleanup removes identity links, queues promotion accounts, never recycles assigned codes',async()=>{await db.query("update exclusive_private.campaigns set starts_at=now()-interval '200 days', ends_at=now()-interval '100 days' where id=$1",[campaign]);const result=(await db.query('select public.exclusive_cleanup() as users')).rows[0].users;assert.ok(result.length>0);assert.ok(!result.includes(ids[0]));assert.equal((await db.query('select count(*) from exclusive_private.assignments')).rows[0].count,'0');assert.equal((await db.query('select count(*) from exclusive_private.identities')).rows[0].count,'0');assert.ok(Number((await db.query("select count(*) from exclusive_private.codes where status='ASSIGNED' and recipient_id is null")).rows[0].count)>0);await assert.rejects(()=>call('admin_campaign',{active:true,user_limit:1}),/CAMPAIGN_CLOSED/);assert.deepEqual((await call('mine',{},ids[1])).assignments,[]);});
 
  }finally{await pool?.end();await db?.end();await server.stop();await rm(dir,{recursive:true,force:true});}
