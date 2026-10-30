@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-27T22:25:54Z",
+  "updatedAt": "2026-10-30T22:30:15Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -35,7 +35,7 @@
     {
       "packageName": "com.watchfacestudio.lavaorange",
       "title": "Lava Lamp Orange Watch Face",
-      "shortDescription": "Groovy 60s lava lamp with animated orange lava, weather, steps and heart rate.",
+      "shortDescription": "Animated lava lamp watch face for Wear OS, with retro style, weather and steps",
       "imageUrl": "https://play-lh.googleusercontent.com/dtsPgs1ktPF0ESJqBGQIQX4n21ej3zqIRqflnZxrp7eqoy9UQZbwLybEkPPXGImgi4dx8xBG6b4iPAA2UgrquS4=s512-rw"
     },
     {
