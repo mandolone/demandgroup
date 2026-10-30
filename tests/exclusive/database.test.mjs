@@ -102,6 +102,25 @@ test('PostgreSQL campaign integration and security',async t=>{
    assert.equal((await db.query("select count(*) from exclusive_private.newsletter_subscriptions where email='fixture-30@example.invalid'")).rows[0].count,'0');
    const remaining=(await newsletter('admin_newsletter_withdrawals')).contacts;assert.equal(remaining.length,1);assert.equal(remaining[0].email,'fixture-31@example.invalid');
  });
+ await t.test('multiple partners: add ten new venues without application changes, isolate QR/stock and keep the global user limit',async()=>{
+   for(let i=0;i<10;i++){
+     const partner=`test-venue-${i}`;
+     await call('admin_partner',{id:partner,name:`Synthetic test venue ${i}`,active:true});
+     accessKeys[partner]=(await call('admin_access_create',{partner})).access;
+     await batch(partner,'gearweirdo',[`DYNAMICVENUE${i}PROMO`]);
+     const assignment=await claim(ids[33+i],partner,'gearweirdo');
+     assert.equal(assignment.assignments[0].partner,partner);
+     assert.equal(assignment.assignments[0].code,`DYNAMICVENUE${i}PROMO`);
+   }
+   const snapshot=await call('admin_snapshot');assert.equal(snapshot.partners.length,12);assert.equal(snapshot.access_links.length,12);
+   const recovered=await claim(ids[33],'sara');assert.equal(recovered.assignments.length,1);assert.equal(recovered.assignments[0].partner,'test-venue-0');
+   await assert.rejects(()=>call('catalog',{partner:'test-venue-1',access:accessKeys['test-venue-0']}),/PARTNER_ACCESS_REQUIRED/);
+   await call('admin_partner',{id:'test-venue-0',name:'Renamed synthetic venue',active:false});
+   await assert.rejects(()=>call('catalog',{partner:'test-venue-0',access:accessKeys['test-venue-0']}),/PARTNER_ACCESS_REQUIRED/);
+   await assert.rejects(()=>claim(ids[43],'test-venue-0','gearweirdo'),/PARTNER_ACCESS_REQUIRED/);
+   await call('admin_partner',{id:'test-venue-0',name:'Renamed synthetic venue',active:true});
+   assert.equal((await call('catalog',{partner:'test-venue-0',access:accessKeys['test-venue-0']})).partner,'Renamed synthetic venue');
+ });
  await t.test('private QR: revocation, replacement and expiry block old keys and preserve other partner links',async()=>{
    const old=accessKeys.sara;
    await call('admin_access_revoke',{partner:'sara'});
