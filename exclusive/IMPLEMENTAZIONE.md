@@ -22,7 +22,7 @@ Il repository mantiene anche sorgenti React 19 / Vinext 1 beta, Vite 8 e uno sch
 ## Configurazione esterna, nell’ordine
 
 1. Creare o selezionare un progetto **Supabase dedicato alla promozione**, preferibilmente nella regione scelta dal titolare. I suoi account non devono essere usati da servizi estranei: il cleanup elimina gli account di promozione scaduti, esclusi gli amministratori.
-2. Con Supabase CLI autenticata e collegata al progetto, applicare `supabase db push`. Sono presenti tre migrazioni ordinate in `supabase/migrations/`. Non applicare `setup/bootstrap.sql` come migrazione: contiene segnaposto deliberati.
+2. Con Supabase CLI autenticata e collegata al progetto, applicare `supabase db push`. Sono presenti quattro migrazioni ordinate in `supabase/migrations/`. Non applicare `setup/bootstrap.sql` come migrazione: contiene segnaposto deliberati.
 3. In Authentication abilitare provider Email; usare OTP senza password, disabilitare anonymous sign-in e altri provider non necessari. Modificare il template Magic Link per includere **`{{ .Token }}`**, non un link; usare un codice di 6–10 cifre. Configurare SMTP reale, sender verificato, scadenza OTP e limiti di invio/validazione. Prima del lancio controllare la consegna sia a nuovi utenti sia agli utenti già registrati.
 4. Creare widget Cloudflare Turnstile per `demandgroup.smokeandthink.com`. Abilitare CAPTCHA nelle impostazioni Supabase Auth con la relativa chiave segreta. Impostare anche le variabili server elencate in `supabase/secrets.example` con `supabase secrets set --env-file <file-privato.env>`. Per staging aggiungere esplicitamente il suo origin/hostname; non usare wildcard. Non inserire mai service-role key o chiavi segrete nei file pubblici.
 5. Distribuire **solo dopo autorizzazione** `supabase functions deploy exclusive-api` e `supabase functions deploy exclusive-cleanup`. Le funzioni hanno `verify_jwt=false` perché la prima include azioni pubbliche e verifica i JWT per ogni azione protetta; la seconda richiede un segreto indipendente. Le RPC DB restano invocabili solo dal service role. CORS non è la barriera di autenticazione.
@@ -33,9 +33,25 @@ Il repository mantiene anche sorgenti React 19 / Vinext 1 beta, Vite 8 e uno sch
 10. Nel pannello caricare **CSV reali**, uno per coppia quadrante/partner, default 25 codici ciascuno. Header facoltativo `code`, una sola colonna, righe UTF-8/BOM supportate. Indicare quantità e scadenza effettiva di Google Play. Non inventare codici mancanti. Ripetere il caricamento dopo un problema di rete con lo stesso batch: è idempotente. Non aggiornare o chiudere la pagina durante il caricamento; dopo un’interruzione completa controllare prima la lista importazioni, poiché il batch ID vive solo in memoria.
 11. Provare la matrice completa in un progetto di staging: email nuove/esistenti, CAPTCHA reale, browser mobile/desktop, logout/recupero, CSV reali non produttivi e accesso amministrativo negato. Solo dopo questi controlli e autorizzazione esplicita, attivare la campagna e pubblicare/mergiare su `main`. Un push su `main` pubblica GitHub Pages.
 
-## QR già preparati
+## Accesso riservato tramite QR privato — aggiornamento requisito
 
-Gli URL sono il dominio reale verificato più `/exclusive/?partner=valentina` e `?partner=sara`. Il percorso sarà disponibile soltanto dopo il rilascio autorizzato. Il pannello genera i QR per ogni partner futuro senza modificare codice. Lo script `scripts/generate-exclusive-qr.mjs` permette anche generazione offline, con origine esplicita e margine bianco per stampa. Le immagini non includono né email né codici.
+La navigazione del sito pubblico non contiene più il collegamento Exclusive. `/exclusive/` senza invito mostra una pagina chiusa e il ritorno al catalogo pubblico. Il catalogo della promozione viene renderizzato soltanto dopo una risposta positiva del server, e tutte le pagine Exclusive hanno `noindex,nofollow,noarchive`.
+
+Il parametro `partner` rimane semplice provenienza. La quarta migrazione aggiunge una chiave di accesso casuale di 256 bit separata, specifica per coppia partner/campagna; nel database viene conservato soltanto il suo hash SHA-256. Il QR contiene un URL con struttura `/exclusive/?partner=<partner>#access=<chiave-segreta>`. Il frammento non è inviato al server statico o nei referrer: la chiave viene inviata solo nel corpo della richiesta alla funzione sicura. Non viene salvata in localStorage, sessionStorage o file pubblici.
+
+L’RPC server richiede un invito valido, non revocato e non scaduto, legato al partner corretto, prima di restituire disponibilità, registrare visite o assegnare codici. Non basta scoprire l’URL, cambiare parametro o aggirare la UI. La verifica è nel database e protegge anche chiamate dirette all’API. I limiti per email verificata e le transazioni atomiche restano invariati. Il recupero server dei soli codici già assegnati alla propria identità rimane consentito dopo autenticazione; non distribuisce nuovi codici senza invito.
+
+Dal pannello, per ogni struttura:
+1. **Generate private QR** crea una chiave sul server e la restituisce una sola volta all’amministratore verificato.
+2. Scaricare subito **QR PNG** e **QR SVG**; la chiave resta soltanto nella memoria del tab e si perde al refresh/chiusura. Conservare i file scaricati privatamente e consegnarli soltanto alla struttura.
+3. **Replace private QR** genera una nuova chiave e invalida tutte le vecchie stampe per quella coppia partner/campagna, dopo avviso esplicito.
+4. **Revoke QR** chiude l’accesso a nuovi codici attraverso quel QR; non rimette in circolo i codici già assegnati.
+
+La scadenza iniziale coincide con la fine della campagna al momento della generazione. Se si prolunga la campagna, verificare e rigenerare i QR che scadono prima. Disattivare il partner blocca anche l’uso del suo invito.
+
+**I vecchi QR semplici Valentina/Sara sono superati e non devono essere distribuiti.** Non contengono alcuna chiave e non aprono più la promozione. Restano conservati per rispettare la cronologia dei materiali; un avviso è stato aggiunto alla relativa cartella esterna. Non sono stati inventati QR funzionanti prima della configurazione del database. Lo script offline ora accetta soltanto chiavi reali già emesse dal backend da un file privato e non stampa gli URL segreti nei log; usare preferibilmente il download dal pannello.
+
+**Limite del modello QR:** chi possiede il link può inoltrarlo. La chiave dimostra il possesso dell’invito, non la presenza fisica nella struttura o l’identità della persona. Per limitare ulteriormente la distribuzione servirebbero inviti individuali o una consegna/verifica da parte della struttura: non viene dichiarata una garanzia di scansione fisica.
 
 ## Verifiche e limiti della consegna
 
@@ -54,7 +70,7 @@ Il precedente test `rendered-html.test.mjs` verificava ancora lo scheletro inizi
 
 ## Esito finale dei controlli (30 ottobre 2026)
 
-- `npm test`: **22 controlli Exclusive + 5 rendering route**, tutti superati; build Vinext completata.
+- `npm test`: **32 controlli Exclusive + 5 rendering route**, tutti superati; build Vinext completata.
 - `python3 -m unittest discover -s tests -p 'test_catalog.py' -v`: **9 test**, tutti superati.
 - Deno `check` delle due Edge Functions: superato, importazioni risolte e lockfile conservato.
 - Anteprima via browser: verificati impaginazione mobile e desktop, schede reali, dialogo di recupero e accesso al pannello bloccato fino alla configurazione.
@@ -69,3 +85,7 @@ L’invito alla recensione sincera compare dopo l’assegnazione, senza condizio
 Non sono state collegate API marketing o spedite newsletter: l’operatore esporta CSV e usa Mailchimp (o, dopo aggiornamento privacy, Brevo). Prima di ogni invio deve allineare le revoche del sito e rispettare le disiscrizioni già presenti nel provider. Piano gratuito, quote attuali e guida pratica: [AVVIO_GRATUITO.md](AVVIO_GRATUITO.md).
 
 Verifica dell’aggiornamento newsletter: `npm test` supera 28 controlli Exclusive e 5 rendering route. Deno check supera entrambe le funzioni aggiornate. Le prove newsletter coprono assenza del consenso predefinito, email verificata, scelta esplicita/versione valida, indipendenza dai codici, idempotenza, accesso amministrativo agli export, revoca e scadenza/conservazione. Nessuna email inviata e nessun account marketing collegato.
+
+Verifiche di accesso privato: URL privo di chiave, token casuale, token di un altro partner, revoca, sostituzione, scadenza, autorizzazione amministrativa all’emissione, hash nel DB e assenza di chiavi grezze dagli snapshot. La quarta migrazione sposta l’implementazione transazionale originale nello schema privato e applica il controllo invito nell’unico entry point pubblico service-role. Nessuna migrazione remota o pubblicazione eseguita.
+
+Esito dell’aggiornamento accesso QR: 32 controlli Exclusive + 5 rendering route superati, Deno check superato; anteprima browser di `/exclusive/` e `?partner=valentina` verificata: entrambe mostrano soltanto l’accesso riservato senza chiave. Il test del backend configurato con QR effettivo resta da eseguire in staging, perché nessun progetto Supabase o credenziale reale è stato fornito.

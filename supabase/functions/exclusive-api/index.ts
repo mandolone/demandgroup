@@ -4,9 +4,9 @@ import { parseCodes } from '../_shared/csv.mjs';
 const url = Deno.env.get('SUPABASE_URL')!;
 const service = createClient(url, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, {auth:{persistSession:false,autoRefreshToken:false}});
 const origins = (Deno.env.get('EXCLUSIVE_ALLOWED_ORIGINS') || '').split(',').map(s=>s.trim());
-const messages = ['ADMIN_REQUIRED','CAMPAIGN_NOT_FOUND','CAMPAIGN_CLOSED','PARTNER_UNAVAILABLE','WATCHFACE_UNAVAILABLE','VERIFIED_EMAIL_REQUIRED','INVALID_ROW_COUNT','INVALID_EXPIRY','INVALID_CODE_FORMAT','DUPLICATE_CODE','INVALID_STATE','EXPLICIT_NEWSLETTER_CHOICE_REQUIRED','CONSENT_VERSION_REQUIRED'];
+const messages = ['ADMIN_REQUIRED','CAMPAIGN_NOT_FOUND','CAMPAIGN_CLOSED','PARTNER_UNAVAILABLE','WATCHFACE_UNAVAILABLE','VERIFIED_EMAIL_REQUIRED','INVALID_ROW_COUNT','INVALID_EXPIRY','INVALID_CODE_FORMAT','DUPLICATE_CODE','INVALID_STATE','PARTNER_ACCESS_REQUIRED','EXPLICIT_NEWSLETTER_CHOICE_REQUIRED','CONSENT_VERSION_REQUIRED'];
 const publicActions = ['catalog','visit'];
-const allowedActions = [...publicActions,'mine','claim','admin_snapshot','admin_partner','admin_campaign','admin_watchface','admin_import','admin_code_state','newsletter_status','newsletter_set','admin_newsletter_export','admin_newsletter_withdrawals'];
+const allowedActions = [...publicActions,'mine','claim','admin_snapshot','admin_partner','admin_campaign','admin_watchface','admin_import','admin_code_state','admin_access_create','admin_access_revoke','admin_access_status','newsletter_status','newsletter_set','admin_newsletter_export','admin_newsletter_withdrawals'];
 
 async function digest(value: string) {
  const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(Deno.env.get('EXCLUSIVE_RATE_SECRET')!),{name:'HMAC',hash:'SHA-256'},false,['sign']);
