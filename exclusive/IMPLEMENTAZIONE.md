@@ -96,7 +96,7 @@ Valentina e Sara sono esclusivamente le due voci iniziali, non un limite. Il pan
 
 ## Collegamento al progetto dell’utente
 
-URL Supabase, publishable key e site key Turnstile forniti dall’utente sono stati inseriti nella configurazione pubblica. `privacyReady` resta false e la campagna non è ancora configurata: nessuna attivazione. Verifica reale con la sola publishable key: entrambe le RPC amministrative hanno risposto HTTP 401 / PostgreSQL 42501 (permesso negato). Segreti delle funzioni server preparati solo in un file locale escluso da Git; la secret Turnstile va inserita dall’utente direttamente nel file/pannello, non in chat.
+URL Supabase, publishable key e site key Turnstile forniti dall’utente sono stati inseriti nella configurazione pubblica. In quella fase `privacyReady` era false e la campagna non era ancora configurata. Verifica reale con la sola publishable key: entrambe le RPC amministrative hanno risposto HTTP 401 / PostgreSQL 42501 (permesso negato). Segreti delle funzioni server preparati solo in un file locale escluso da Git; la secret Turnstile va inserita dall’utente direttamente nel file/pannello, non in chat.
 
 ## Distribuzione manuale dall’editor Supabase
 
@@ -110,6 +110,12 @@ La quinta migrazione accetta `ends_at = null` e QR revocabili senza scadenza fis
 
 Il criterio di conservazione viene adattato: per i programmi continuativi gli account Auth non amministrativi inattivi sono rimossi dopo il periodo configurato (default 90 giorni), con distacco del collegamento diretto all’account. Il record HMAC e l’assegnazione pseudonima restano necessari durante il programma per il limite e il recupero: non vanno descritti come anonimi. Alla chiusura si applica il cleanup già previsto dopo il periodo di conservazione. La newsletter futura mantiene il consenso separato; nessun provider marketing è collegato.
 
-Il titolare indicato è Luca Mandolesi, contatto demand.group@tuta.io. L’indirizzo postale fornito è conservato esclusivamente in una bozza privata locale esclusa da Git, non nei sorgenti pubblici. L’art. 13 GDPR richiede identità e dati di contatto; non contiene un obbligo espresso di pubblicare l’indirizzo di residenza. I recapiti adeguati e gli eventuali obblighi ulteriori vanno valutati prima del rilascio. `privacyReady` resta false.
+Il titolare indicato è Luca Mandolesi, contatto demand.group@tuta.io. L’indirizzo postale fornito è conservato esclusivamente in una bozza privata locale esclusa da Git, non nei sorgenti pubblici. L’art. 13 GDPR richiede identità e dati di contatto; non contiene un obbligo espresso di pubblicare l’indirizzo di residenza. L’informativa di attivazione usa il recapito email per le richieste privacy; l’indirizzo postale non viene pubblicato.
 
 Poiché il progetto remoto ha già ricevuto le prime quattro migrazioni, applicare soltanto `work/supabase-setup/07_PROMOZIONE_CONTINUATIVA_E_STRUTTURE.sql` dal SQL Editor. Non rieseguire l’installazione iniziale. Non sono stati eseguiti aggiornamenti remoti o attivazioni dall’agente. Test reali PostgreSQL verificano programma senza fine, QR permanente ma revocabile, conteggio visite, scadenza distinta dei lotti e mancato secondo regalo dopo cancellazione/ricreazione dell’account.
+
+## Attivazione cliente — 30 ottobre 2026
+
+Regione Supabase confermata dall’utente: West EU — Ireland (eu-west-1). Il testo privacy definitivo identifica Supabase, Resend, Cloudflare e GitHub e distingue la regione primaria dai possibili trasferimenti dei fornitori; riporta i relativi termini e le basi per beneficio richiesto, sicurezza e consenso newsletter separato. `privacyReady` passa a true nel rilascio di attivazione. Il programma resta controllato server-side tramite il suo campo active e conserva un solo regalo totale per identità verificata.
+
+L’utente ha eseguito il file locale privato 08 e confermato il job `exclusive-daily-cleanup`, `17 3 * * *`, active=true. Il template pubblico `supabase/setup/schedule-cleanup.sql` non contiene valori segreti; richiede Vault e aggiorna lo stesso job nominato senza duplicarlo. Il file locale 08, con segreto reale, è escluso da Git e leggibile solo dal proprietario. La verifica locale della query ha simulato le API Vault/Cron su PostgreSQL reale; l’installazione effettiva delle estensioni è stata confermata dal risultato dell’utente. Non è ancora verificata la prima risposta HTTP programmata: controllare anche `net._http_response`, non soltanto lo stato SQL del job.
