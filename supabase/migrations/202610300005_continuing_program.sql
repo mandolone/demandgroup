@@ -162,6 +162,13 @@ begin
    and exists(select 1 from exclusive_private.identity_campaigns ic join exclusive_private.campaigns c on c.id=ic.campaign_id where ic.identity_id=i.id and c.ends_at is null and c.purged_at is null)
    and not exists(select 1 from exclusive_private.identity_campaigns ic join exclusive_private.campaigns c on c.id=ic.campaign_id where ic.identity_id=i.id and c.purged_at is null and i.last_seen_at>=now()-make_interval(days=>c.retention_days))
  on conflict do nothing;
+ -- Dedicated promotion project: remove abandoned Auth-only signups after 90 inactive days as well.
+ insert into exclusive_private.auth_deletion_queue(user_id)
+ select u.id from auth.users u
+ where not exists(select 1 from exclusive_private.admins a where a.user_id=u.id)
+   and not exists(select 1 from exclusive_private.identities i where i.user_id=u.id)
+   and coalesce(u.last_sign_in_at,u.created_at)<now()-interval '90 days'
+ on conflict do nothing;
  -- Sever account linkage before deleting Auth accounts. Keyed email identities remain for the one-gift rule.
  update exclusive_private.identities i set user_id=null where exists(select 1 from exclusive_private.auth_deletion_queue q where q.user_id=i.user_id);
  select coalesce(jsonb_agg(user_id),'[]') into result from exclusive_private.auth_deletion_queue;
