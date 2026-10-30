@@ -1,4 +1,5 @@
 import QRCode from 'qrcode';
+import {parseCodes} from '../../supabase/functions/_shared/csv.mjs';
 import {$,el,client,connectionReady,api,captcha,busy,sendOtp,verifyOtp,download,csv} from './shared.js';
 let snapshot,check,importId=null;
 const privateLinks=new Map();
@@ -45,7 +46,20 @@ $('#partner-form').onsubmit=e=>{e.preventDefault();submit(e.target,'admin_partne
 $('#campaign-form').onsubmit=e=>{e.preventDefault();submit(e.target,'admin_campaign',()=>({user_limit:Number(value('user-limit')),active:$('#campaign-active').checked,starts_at:new Date(value('starts-at')).toISOString(),ends_at:$('#campaign-open-ended').checked?null:new Date(value('ends-at')).toISOString(),retention_days:Number(value('retention'))}));};
 $('#batch-form').onsubmit=e=>{e.preventDefault();submit(e.target,'admin_code_state',()=>({import_id:value('batch-id'),status:value('batch-state')}));};
 $('#csv').onchange=()=>importId=null;
-$('#import-form').onsubmit=async e=>{e.preventDefault();const b=e.submitter;busy(b,true);try{const file=$('#csv').files[0];if(file.size>500000)throw Error('Use batches below 500 KB.');importId??=crypto.randomUUID();const data=await api('admin_import',{partner:value('import-partner'),watchface:value('import-watchface'),expected_rows:Number(value('expected-rows')),expires_at:new Date(value('expires-at')).toISOString(),import_id:importId,csv:await file.text()});$('#import-result').textContent=`${data.already_imported?'Batch already imported':`${data.imported} codes imported`}. Batch ID: ${importId}`;$('#csv').value='';importId=null;await refresh();}catch(e){$('#import-result').textContent=e.message;}finally{busy(b,false);}};
+$('#import-form').onsubmit=async e=>{
+ e.preventDefault();const b=e.submitter;busy(b,true);
+ try{
+  const file=$('#csv').files[0];if(!file)throw Error('Choose your Google Play CSV first.');
+  if(file.size>500000)throw Error('Use batches below 500 KB.');
+  let codes;try{codes=parseCodes(await file.text());}catch{throw Error('Use the original Google Play CSV, or one code per row with an optional Promotion code or code header.');}
+  importId??=crypto.randomUUID();
+  // Keep compatibility with the live Edge Function, which accepts headerless CSV.
+  // Server-side parsing and authorization still validate the complete batch independently.
+  const data=await api('admin_import',{partner:value('import-partner'),watchface:value('import-watchface'),expected_rows:Number(value('expected-rows')),expires_at:new Date(value('expires-at')).toISOString(),import_id:importId,csv:codes.join('\n')});
+  $('#import-result').textContent=`${data.already_imported?'Batch already imported':`${data.imported} codes imported`}. Batch ID: ${importId}`;
+  $('#csv').value='';importId=null;await refresh();
+ }catch(e){$('#import-result').textContent=e.message;}finally{busy(b,false);}
+};
 $('#export').onclick=()=>download('exclusive-statistics.csv',csv([...metricRows(),[],['Partner','Watch face','Available','Assigned','Reserved','Expired','Disabled'],...snapshot.stock.map(s=>[s.partner_id,s.watchface_id,s.available,s.assigned,s.reserved,s.expired,s.disabled])]),'text/csv;charset=utf-8');
 $('#refresh').onclick=refresh;$('#signout').onclick=async()=>{privateLinks.clear();await client.auth.signOut({scope:'local'});location.reload();};
 $('#email-form').onsubmit=async e=>{e.preventDefault();busy(e.submitter,true);try{await sendOtp(value('email'),check?.get());$('#email-form').hidden=true;$('#otp-form').hidden=false;status('Check your email for the verification code.');$('#otp').focus();}catch(e){status(e.message);}finally{check?.reset();busy(e.submitter,false);}};
