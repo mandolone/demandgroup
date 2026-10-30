@@ -1,0 +1,17 @@
+{
+  "supabaseUrl": "https://cfeciusauhkjzgkmdvks.supabase.co",
+  "supabasePublishableKey": "sb_publishable_0tJSwNephYe5Kom8R5fVHQ_EEOaR9Z5",
+  "turnstileSiteKey": "0x4AAAAAAFs7AfTUKC216nmN",
+  "campaign": "partner-collection",
+  "privacyReady": false,
+  "socialLinks": [
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/demand.group/"
+    },
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@DemandWatchfaces"
+    }
+  ]
+}

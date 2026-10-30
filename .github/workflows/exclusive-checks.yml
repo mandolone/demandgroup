@@ -1,0 +1,37 @@
+name: Verify exclusive promotion
+on:
+  pull_request:
+    paths:
+      - 'exclusive/**'
+      - 'supabase/**'
+      - 'scripts/*exclusive*'
+      - 'tests/**'
+      - 'app/**'
+      - 'docs/**'
+      - 'public/**'
+      - 'package*.json'
+      - '.github/workflows/exclusive-checks.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: npm ci
+      - name: PostgreSQL concurrency, public files, build and route regression checks
+        run: npm test
+      - name: Existing companion catalog checks
+        run: python3 -m unittest discover -s tests -p 'test_catalog.py' -v
+      - name: Verify generated deployment copies
+        run: git diff --exit-code -- docs/exclusive public/exclusive app/exclusive
+      - name: Type-check protected server functions
+        run: deno check --config supabase/functions/deno.json supabase/functions/exclusive-api/index.ts supabase/functions/exclusive-cleanup/index.ts

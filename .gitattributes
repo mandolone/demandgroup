@@ -1,0 +1,4 @@
+# SDK bundles contain intentional trailing spaces in embedded string literals.
+docs/exclusive/*.js whitespace=-blank-at-eol linguist-generated=true
+public/exclusive/*.js whitespace=-blank-at-eol linguist-generated=true
+app/exclusive/**/content.ts linguist-generated=true
