@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-30T22:30:15Z",
+  "updatedAt": "2026-10-31T21:45:01Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -40,8 +40,8 @@
     },
     {
       "packageName": "com.watchfacestudio.violetlava",
-      "title": "Lava Lamp Retro 60s Watch Face",
-      "shortDescription": "Animated lava lamp, groovy 60s style, daily quotes, steps at a glance.",
+      "title": "Lava Lamp Violet Watch Face",
+      "shortDescription": "Retro lava lamp watch face for Wear OS, with violet animation and daily phrases",
       "imageUrl": "https://play-lh.googleusercontent.com/nzcui8oTOoCf3HsWk-Hfo5mwI2LAYPa6vXv7oe8cc7Uba7_pqdAUJMTKxMmor3OV_OhMdHYqC2sVYivUPpTBUw=s512-rw"
     },
     {
