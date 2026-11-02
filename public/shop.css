@@ -74,3 +74,7 @@
 .product-gallery .gallery-thumbs-wide,.product-gallery:has(.motion-thumb) .gallery-thumbs-wide{justify-content:flex-start;flex-wrap:wrap;overflow-x:visible}
 .product-gallery .gallery-thumbs-wide .gallery-thumb,.product-gallery:has(.motion-thumb) .gallery-thumbs-wide .gallery-thumb{flex:0 0 calc((100% - 20px)/3);min-width:0;width:auto}
 .gallery-motion[src*="kanji-wave"],.zoom video[src*="kanji-wave"]{clip-path:circle(49.8% at 50% 50%)}
+
+/* Preserve the exact dial artwork; expose the page behind the square capture's corners. */
+img:is([src="/products/new-releases/megastructure-dial.webp"],[src="/products/new-releases/long-distance-call-dial.webp"],[src^="/products/kanji-wave-"],[src^="/products/ukiyo-wave-"]):not([src*="-setting"]):not([src*="-campaign"]),
+video[poster^="/products/kanji-wave-"]{clip-path:circle(50% at 50% 50%)}
