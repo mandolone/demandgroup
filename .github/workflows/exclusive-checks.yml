@@ -2,6 +2,8 @@ name: Verify exclusive promotion
 on:
   pull_request:
     paths:
+      - 'website/**'
+      - 'scripts/build-storefront.mjs'
       - 'exclusive/**'
       - 'supabase/**'
       - 'scripts/*exclusive*'
@@ -32,6 +34,6 @@ jobs:
       - name: Existing companion catalog checks
         run: python3 -m unittest discover -s tests -p 'test_catalog.py' -v
       - name: Verify generated deployment copies
-        run: git diff --exit-code -- docs/exclusive public/exclusive app/exclusive
+        run: git diff --exit-code -- docs public app
       - name: Type-check protected server functions
         run: deno check --config supabase/functions/deno.json supabase/functions/exclusive-api/index.ts supabase/functions/exclusive-cleanup/index.ts

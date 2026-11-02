@@ -19,9 +19,9 @@ const body = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL("https://demandgroup.smokeandthink.com"),
   alternates: { canonical: "/" },
-  title: "Demand Group — Art, Space & Mechanical Wear OS Watch Faces",
+  title: "Demand Group — Original Wear OS Watch Faces",
   description:
-    "Explore Wear OS watch faces inspired by space, vintage instruments, mechanics and Japanese art. Discover Lava Lamp Orange and Retro 60s, plus original watch-face animations. Designed in Italy.",
+    "Explore original Wear OS watch faces, studio previews and the complete Demand Group collection. Designed in Italy.",
   applicationName: "Demand Group",
   icons: { icon: "/favicon.jpg", shortcut: "/favicon.jpg", apple: "/favicon.jpg" },
   openGraph: {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description:
       "Independent, vintage-inspired watch faces designed for Wear OS.",
     type: "website",
-    images: [{ url: "https://demandgroup.smokeandthink.com/hero-collection.png", width: 1536, height: 1024 }],
+    images: [{ url: "https://demandgroup.smokeandthink.com/products/new-releases/megastructure-campaign.webp", width: 1024, height: 500 }],
   },
 };
 

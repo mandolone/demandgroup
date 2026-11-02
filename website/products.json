@@ -1,0 +1,208 @@
+[
+  {
+    "slug": "flat-earth",
+    "title": "Flat Earth",
+    "description": "An antique-inspired miniature world, with weather, moon phases and a playful perspective on time.",
+    "category": "worlds",
+    "status": "coming-soon",
+    "promo": "/products/new-releases/flat-earth-campaign.webp",
+    "image": "/products/new-releases/flat-earth-dial.webp",
+    "mediaNote": "Original watch-face preview. Example values.",
+    "features": [
+      "An antique-map world on your wrist",
+      "Weather and moon phases",
+      "A playful, illustrated approach to digital time"
+    ]
+  },
+  {
+    "slug": "long-distance-call",
+    "title": "Long Distance Call",
+    "description": "Keep your people close. A flowing two-part dial with world-clock displays and space for the people you miss.",
+    "category": "everyday",
+    "status": "coming-soon",
+    "promo": "/products/new-releases/long-distance-call-campaign.webp",
+    "image": "/products/new-releases/long-distance-call-dial.webp",
+    "mediaNote": "Illustrated personalization example. Contact portraits are fictional; third-party apps and complication providers are not included.",
+    "features": [
+      "A two-part dial inspired by connection across distance",
+      "World-clock displays",
+      "Contact portraits and shortcuts shown as personalization examples"
+    ]
+  },
+  {
+    "slug": "megastructure",
+    "title": "Megastructure",
+    "description": "A cyberpunk city that changes atmosphere with the weather and the time of day. A small world with monumental depth.",
+    "category": "worlds",
+    "status": "coming-soon",
+    "promo": "/products/new-releases/megastructure-campaign.webp",
+    "image": "/products/new-releases/megastructure-dial.webp",
+    "mediaNote": "Campaign image: AI-created artistic mockup. The separate dial view is an original project capture with example values.",
+    "features": [
+      "Immersive weather woven into the cityscape",
+      "A sky that changes through the day and night",
+      "Rain, snow, mist and storm atmospheres"
+    ]
+  },
+  {
+    "slug": "solar-flare",
+    "title": "Solar Flare Space Watch Face",
+    "description": "Animated space watch face with solar flares, Earth, Moon and Big Dipper steps.",
+    "image": "/products/new-releases/solar-flare-dial.webp",
+    "category": "space",
+    "status": "available",
+    "package": "com.watchfacestudio.spacesolarflare",
+    "promo": "/products/new-releases/solar-flare-campaign.webp",
+    "mediaNote": "Official Google Play dial image. Campaign imagery uses an original recorded project preview with example values."
+  },
+  {
+    "slug": "artemis-ii",
+    "legacy": "artemis2celebration",
+    "title": "Artemis II Moon Phase Digital",
+    "description": "A moon phase watch face with digital time, weather forecasts and world time",
+    "image": "/products/artemis2celebration-verified.webp",
+    "category": "space",
+    "status": "available",
+    "package": "com.watchfacestudio.artemis2celebration"
+  },
+  {
+    "slug": "cyber-mechanica",
+    "legacy": "cyber",
+    "title": "Cyber Mechanica Watch Face",
+    "description": "Futuristic watch face for Wear OS with weather, steps and three color styles",
+    "image": "/products/cyber-verified.webp",
+    "category": "mechanical",
+    "status": "available",
+    "package": "com.watchfacestudio.cyber"
+  },
+  {
+    "slug": "gear-weirdo",
+    "legacy": "gearweirdo",
+    "title": "GEAR Weirdo Analog Watch Face",
+    "description": "Mechanical watch face for Wear OS with Weirdo mode that swaps the time scales",
+    "image": "/products/gearweirdo-verified.webp",
+    "category": "mechanical",
+    "status": "available",
+    "package": "com.watchfacestudio.gearweirdo"
+  },
+  {
+    "slug": "grunge-rock",
+    "title": "Grunge Rock Watch Face",
+    "description": "watch face with grunge textures and interchangeable music legend portraits.",
+    "image": "/products/new-releases/grunge-rock-dial.webp",
+    "category": "everyday",
+    "status": "available",
+    "package": "com.watchfacestudio.grungemythsrock",
+    "mediaNote": "Official Google Play product image."
+  },
+  {
+    "slug": "kanji-wave",
+    "legacy": "kanji-wave",
+    "title": "Kanji Wave Japanese Watch Face",
+    "description": "Japanese kanji time, parallax waves, weather and liquid step-goal animation.",
+    "image": "/products/kanji-wave-blue.png",
+    "category": "japanese",
+    "status": "available",
+    "package": "com.watchfacestudio.nihongotimewatch"
+  },
+  {
+    "slug": "lava-lamp-orange",
+    "legacy": "lavaorange",
+    "title": "Lava Lamp Orange Watch Face",
+    "description": "Animated lava lamp watch face for Wear OS, with retro style, weather and steps",
+    "image": "/products/lavaorange-verified.webp",
+    "category": "everyday",
+    "status": "available",
+    "package": "com.watchfacestudio.lavaorange"
+  },
+  {
+    "slug": "lava-lamp-violet",
+    "legacy": "violetlava",
+    "title": "Lava Lamp Violet Watch Face",
+    "description": "Retro lava lamp watch face for Wear OS, with violet animation and daily phrases",
+    "image": "/products/violetlava-verified.webp",
+    "category": "everyday",
+    "status": "available",
+    "package": "com.watchfacestudio.violetlava"
+  },
+  {
+    "slug": "outfit",
+    "legacy": "outfit",
+    "title": "Outfit: Wear OS Watch Face",
+    "description": "Elegant analog watch face for Wear OS with 10 colours and useful daily details.",
+    "image": "/products/outfit-preview.webp",
+    "category": "everyday",
+    "status": "available",
+    "package": "com.watchfacestudio.steely"
+  },
+  {
+    "slug": "r4-star",
+    "legacy": "r4star",
+    "title": "R4 Star Analog Watch Face",
+    "description": "Vintage analog watch face for Wear OS with gold hands and a distinctive red star",
+    "image": "/products/r4star-verified.webp",
+    "category": "vintage",
+    "status": "available",
+    "package": "com.watchfacestudio.r4star"
+  },
+  {
+    "slug": "r5s",
+    "legacy": "R5S",
+    "title": "R5S: Soviet Pilot Watch Face",
+    "description": "Vintage pilot watch face for Wear OS with step progress and customizable colors",
+    "image": "/products/R5S-verified.webp",
+    "category": "vintage",
+    "status": "available",
+    "package": "com.watchfacestudio.R5S"
+  },
+  {
+    "slug": "sputnik",
+    "legacy": "sputnik",
+    "title": "Sputnik Animated Watch Face",
+    "description": "Animated space watch face with orbiting satellite, weather, steps and calendar",
+    "image": "/products/sputnik-verified.webp",
+    "category": "space",
+    "status": "available",
+    "package": "com.watchfacestudio.sputnik"
+  },
+  {
+    "slug": "ukiyo-wave",
+    "legacy": "ukiyo-wave",
+    "title": "Ukiyo Wave Japanese Watch Face",
+    "description": "Japanese art, Arabic numerals, parallax waves, animated steps and weather.",
+    "image": "/products/ukiyo-wave-blue.png",
+    "category": "japanese",
+    "status": "available",
+    "package": "com.watchfacestudio.japdigkanjiwave"
+  },
+  {
+    "slug": "voyager-analog",
+    "legacy": "voyageranalog",
+    "title": "Voyager Analog Watch Face",
+    "description": "Animated analog space watch face with Golden Record art and world time",
+    "image": "/products/voyager-analog-verified.webp",
+    "category": "space",
+    "status": "available",
+    "package": "com.watchfacestudio.voyageranalog"
+  },
+  {
+    "slug": "voyager-digital",
+    "legacy": "voyagerdigital",
+    "title": "Voyager Digital Watch Face",
+    "description": "Animated digital space watch face with Golden Record art and world time",
+    "image": "/products/voyager-digital-verified.webp",
+    "category": "space",
+    "status": "available",
+    "package": "com.watchfacestudio.voyagerdigital"
+  },
+  {
+    "slug": "zodiac",
+    "legacy": "zodiac10",
+    "title": "Zodiac Astrology Watch Face",
+    "description": "Zodiac watch face with a changing ring, constellations and named moon phases",
+    "image": "/products/zodiac10-verified.webp",
+    "category": "space",
+    "status": "available",
+    "package": "com.watchfacestudio.zodiac10"
+  }
+]
