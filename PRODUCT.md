@@ -23,7 +23,7 @@ Avoid generic corporate technology sites, neon sci-fi aesthetics, crowded subscr
 ## Design Principles
 
 1. Treat every watch face as a designed object, not a catalog entry.
-2. Let a small, carefully selected collection communicate confidence and taste.
+2. Let a carefully selected homepage communicate confidence and taste, while the separate catalog makes the complete growing collection easy to search and filter.
 3. Combine vintage instrument character with contemporary digital clarity.
 4. Make the independent nature of the studio visible and credible.
 5. Keep the path to Google Play, support, and organization information immediate.

@@ -23,7 +23,7 @@ Barlow Condensed for expressive display typography and Manrope for readable body
 
 ## Layout
 
-Single-page brand narrative with one decisive hero, asymmetric editorial statements, a structured collection register, compatibility information, contact, and privacy. Spacious desktop rhythm collapses to a direct single-column mobile flow.
+A curated homepage introduces the studio, latest releases and collection themes. A separate searchable catalog uses a compact grid and user-controlled incremental loading. Individual product pages retain the larger galleries, original clips and installation details. Desktop layouts adapt to compact mobile grids; homepage previews can be moved manually without automatic rotation.
 
 ## Interaction
 

@@ -1,0 +1,44 @@
+[
+  {
+    "asset": "products/new-releases/flat-earth-campaign.webp",
+    "original": "01-Flat-Earth-Desktop-Quadrante.png",
+    "sha256": "8095cd97b74d16a757583edb12d5458cdabac1c6b254fe2dc0ec0d8893e9c12d",
+    "operation": "WebP encoding and proportional resize only"
+  },
+  {
+    "asset": "products/new-releases/flat-earth-dial.webp",
+    "original": "Icona-Google-Play-512.png",
+    "sha256": "61e4f7c8706eae2f5a378dad12bd5dabb34bd57e6e27c919af06e38c80ea960b",
+    "operation": "WebP encoding and proportional resize only"
+  },
+  {
+    "asset": "products/new-releases/long-distance-call-campaign.webp",
+    "original": "Feature-Graphic-1024x500.png",
+    "sha256": "da31d4679097885a5a023d1b1d66bf6cb8669f8047879c1d4004984ab35d57a4",
+    "operation": "WebP encoding and proportional resize only"
+  },
+  {
+    "asset": "products/new-releases/long-distance-call-dial.webp",
+    "original": "Icona-512x512.png",
+    "sha256": "ef829bd8f0afd1cd75dec5abeec3f67cecf52e9c9fd2345697062fd96c6e5edc",
+    "operation": "WebP encoding and proportional resize only"
+  },
+  {
+    "asset": "products/new-releases/megastructure-campaign.webp",
+    "original": "Megastructure_AI_Feature_Graphic_1024x500.png",
+    "sha256": "cfef1427e7ea2395717e17b7c961efb9cef723929afaf2fa6ed77d8829820387",
+    "operation": "WebP encoding and proportional resize only"
+  },
+  {
+    "asset": "products/new-releases/megastructure-dial.webp",
+    "original": "01_GIORNO_METEO_450.png",
+    "sha256": "f20eb78d1b5a50ab7908bcfd5190213328381aef53058d144c531e7115c450d3",
+    "operation": "WebP encoding and proportional resize only"
+  },
+  {
+    "asset": "products/new-releases/solar-flare-campaign.webp",
+    "original": "Solar-Flare-Thumbnail-1920x1080.jpg",
+    "sha256": "1d308fe03a112719eacbd357627862b58f06f0ccdecee2c19737fddd1f104b34",
+    "operation": "WebP encoding and proportional resize only"
+  }
+]
