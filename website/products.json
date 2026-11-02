@@ -130,7 +130,7 @@
     "legacy": "outfit",
     "title": "Outfit: Wear OS Watch Face",
     "description": "Elegant analog watch face for Wear OS with 10 colours and useful daily details.",
-    "image": "/products/outfit-preview.webp",
+    "image": "/products/outfit-real-colours.gif",
     "category": "everyday",
     "status": "available",
     "package": "com.watchfacestudio.steely"
