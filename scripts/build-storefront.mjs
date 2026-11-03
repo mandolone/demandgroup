@@ -13,6 +13,7 @@ const categories=[
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const readLegacy=name=>readFile(`website/legacy-products/${name}.html`,'utf8');
 const footer=await readLegacy('shop-footer'),zoom=await readLegacy('zoom');
+const appTerms=await readFile('website/app-terms.html','utf8');
 const studio=await readLegacy('studio'),help=await readLegacy('help'),compatibility=await readLegacy('compatibility');
 const nav=(current='')=>`<a class="skip" href="#main-content">Skip to content</a><header class="site-nav"><a href="/" aria-label="Demand Group home"><img src="/demand-group-logo.jpg" alt="Demand Group Italy" width="1280" height="368"></a><nav aria-label="Main navigation"><a href="/watch-faces/"${current==='catalog'?' aria-current="page"':''}>Watch faces</a><a href="/#collections">Collections</a><a href="/#studio">Studio</a><a href="/#help">Help</a></nav></header>`;
 const badge=p=>`<span class="status-tag ${p.status==='available'?'available':''}">${p.status==='available'?'On Google Play':'Coming soon'}</span>`;
@@ -46,9 +47,11 @@ for(const root of ['docs','public']){
  await writeFile(root+'/index.html',document('Demand Group — Original Wear OS Watch Faces','Explore original Wear OS watch faces: Flat Earth, Long Distance Call, Megastructure, Solar Flare and the complete Demand Group collection.','/',home,mega.promo));
  await writeFile(root+'/watch-faces/index.html',document('All Watch Faces — Demand Group','Search Demand Group watch faces by collection and availability. Browse space, weather, vintage, mechanical, Japanese and expressive designs.','/watch-faces/',catalog));
  for(const [slug,p] of Object.entries(detailPages)){await mkdir(`${root}/watch-faces/${slug}`,{recursive:true});await writeFile(`${root}/watch-faces/${slug}/index.html`,document(p.title,p.description,`/watch-faces/${slug}/`,p.body,p.image));}
+ await mkdir(root+'/app-terms',{recursive:true});
+ await writeFile(root+'/app-terms/index.html',document('App Terms of Service — Demand Group','Terms of use for Demand Group Wear OS watch faces and companion apps.','/app-terms/',appTerms+footer));
  await copyFile('website/storefront.css',root+'/storefront.css');
  await build({entryPoints:['website/storefront.js'],bundle:true,format:'esm',target:'es2022',outfile:root+'/storefront.js',minify:true});
- const paths=['/','/watch-faces/',...products.map(detailUrl),'/website-privacy-policy/','/cookie-policy/'];
+ const paths=['/','/watch-faces/',...products.map(detailUrl),'/website-privacy-policy/','/cookie-policy/','/app-terms/'];
  await writeFile(root+'/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map(p=>`<url><loc>${origin+p}</loc></url>`).join('')}</urlset>\n`);
  await writeFile(root+'/robots.txt',`User-agent: *\nDisallow: /exclusive/\nSitemap: ${origin}/sitemap.xml\n`);
 }
@@ -58,3 +61,6 @@ await mkdir('app/watch-faces/[slug]',{recursive:true});
 const frameworkDetails=Object.fromEntries(Object.entries(detailPages).map(([key,p])=>[key,{...p,body:css+p.body}]));
 await writeFile('app/watch-faces/content.ts','export const catalogHtml = '+JSON.stringify(css+catalog)+';\nexport const detailPages: Record<string, {title:string;description:string;image:string;body:string}> = '+JSON.stringify(frameworkDetails)+';\n');
 console.log(`Built compact homepage, searchable catalog and ${products.length} product pages (${products.filter(p=>p.status==='coming-soon').length} studio previews).`);
+
+await mkdir('app/app-terms',{recursive:true});
+await writeFile('app/app-terms/content.ts','export const termsHtml = '+JSON.stringify(appTerms+footer)+';\n');
