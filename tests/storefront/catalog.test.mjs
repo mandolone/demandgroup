@@ -8,7 +8,7 @@ test('search, availability and collection filters combine; URL state restores ex
  let state=catalogState('?collection=space&status=available&q=voyager&shown=24',collections);
  assert.equal(state.shown,24);assert.equal(filterProducts(products,state).length,2);
  const roundtrip=catalogState('?'+stateSearch(state),collections);assert.deepEqual(roundtrip,state);
- state=catalogState('?collection=worlds&status=coming-soon',collections);assert.deepEqual(filterProducts(products,state).map(p=>p.slug),['flat-earth','megastructure']);
+ state=catalogState('?collection=worlds&status=coming-soon',collections);assert.deepEqual(filterProducts(products,state).map(p=>p.slug),['flat-earth']);
  assert.equal(filterProducts(products,{...state,q:'NO SUCH DIAL'}).length,0);
  const bad=catalogState('?collection=unknown&status=private&shown=-1&sort=popular',collections);assert.equal(bad.collection,'all');assert.equal(bad.status,'all');assert.equal(bad.shown,PAGE_SIZE);assert.equal(bad.sort,'featured');
 });

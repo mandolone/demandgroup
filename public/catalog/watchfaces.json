@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-31T21:45:01Z",
+  "updatedAt": "2026-11-04T19:36:16Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -43,6 +43,18 @@
       "title": "Lava Lamp Violet Watch Face",
       "shortDescription": "Retro lava lamp watch face for Wear OS, with violet animation and daily phrases",
       "imageUrl": "https://play-lh.googleusercontent.com/nzcui8oTOoCf3HsWk-Hfo5mwI2LAYPa6vXv7oe8cc7Uba7_pqdAUJMTKxMmor3OV_OhMdHYqC2sVYivUPpTBUw=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.longdistancecall",
+      "title": "Long Distance Call Watch Face",
+      "shortDescription": "Wear OS watch face with favorite contacts, world clocks and a day-night sky",
+      "imageUrl": "https://play-lh.googleusercontent.com/uPMFN67H2OL1krW5pmgq6RK-kgELK49BlnXqNOsSOcpJmheTXLysP-XKZnitim40_K5hb_v_N1dA-TCDXlFmkU0=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.blamelike",
+      "title": "Megastructure Cyberpunk Face",
+      "shortDescription": "Animated cyberpunk weather watch face for Wear OS, with a living sci-fi city.",
+      "imageUrl": "https://play-lh.googleusercontent.com/f32IDWQjBRj3MuZ6bOqFUn2WuiBXjEjeyNFfr0rBtdNL5W4EFC5XwjP75uIFfdUedSkjcPQxRKxW7c4X12CbROo=s512-rw"
     },
     {
       "packageName": "com.watchfacestudio.steely",

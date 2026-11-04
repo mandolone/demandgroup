@@ -9,6 +9,7 @@ The public site has a curated homepage, `/watch-faces/` catalog, and an individu
 - `legacy-products/` retains the original product galleries, videos, installation details and footer/support content from the former homepage. The generator moves these intact to their own product pages.
 - Store optimized images in both `public/products/` and `docs/products/`. New release images use the existing approved artwork, with proportional resizing/WebP encoding only; source filenames and hashes are in `media-provenance.json`. AI campaign mockups and illustrated personalization examples are labelled separately from original dial captures.
 - Run `npm run build:storefront` and `npm test`. Commit generated `docs`, `public` and `app` copies together. Adding another known product is a data/content update, not another homepage section.
+- On 4 November 2026, Long Distance Call (`com.watchfacestudio.longdistancecall`) and Megastructure (`com.watchfacestudio.blamelike`) were verified on Google Play and marked available, with their purchase links enabled. Flat Earth remains a studio preview.
 - The companion discovery feed remains `/catalog/watchfaces.json`, with its existing schema and sync job. Pre-launch website previews are intentionally excluded from it. Mark a preview available and provide its real package only after release is verified.
 
 ## Browsing behavior

@@ -19,7 +19,7 @@
     "title": "Long Distance Call",
     "description": "Keep your people close. A flowing two-part dial with world-clock displays and space for the people you miss.",
     "category": "everyday",
-    "status": "coming-soon",
+    "status": "available",
     "promo": "/products/new-releases/long-distance-call-campaign.webp",
     "image": "/products/new-releases/long-distance-call-dial.webp",
     "mediaNote": "Illustrated personalization example. Contact portraits are fictional; third-party apps and complication providers are not included.",
@@ -27,14 +27,15 @@
       "A two-part dial inspired by connection across distance",
       "World-clock displays",
       "Contact portraits and shortcuts shown as personalization examples"
-    ]
+    ],
+    "package": "com.watchfacestudio.longdistancecall"
   },
   {
     "slug": "megastructure",
     "title": "Megastructure",
     "description": "A cyberpunk city that changes atmosphere with the weather and the time of day. A small world with monumental depth.",
     "category": "worlds",
-    "status": "coming-soon",
+    "status": "available",
     "promo": "/products/new-releases/megastructure-campaign.webp",
     "image": "/products/new-releases/megastructure-dial.webp",
     "mediaNote": "Campaign image: AI-created artistic mockup. The separate dial view is an original project capture with example values.",
@@ -42,7 +43,8 @@
       "Immersive weather woven into the cityscape",
       "A sky that changes through the day and night",
       "Rain, snow, mist and storm atmospheres"
-    ]
+    ],
+    "package": "com.watchfacestudio.blamelike"
   },
   {
     "slug": "solar-flare",
