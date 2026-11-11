@@ -26,7 +26,7 @@ test('PostgreSQL campaign integration and security',async t=>{
  await server.initialise();await server.start();db=server.getPgClient();await db.connect();
  const cfg=db.connectionParameters;pool=new pg.Pool({host:'127.0.0.1',port:cfg.port,user:cfg.user,password:cfg.password,database:cfg.database,max:20});
  await db.query("create role anon;create role authenticated;create role service_role;create schema auth;create table auth.users(id uuid primary key,email text,email_confirmed_at timestamptz,is_anonymous boolean default false,created_at timestamptz default now(),last_sign_in_at timestamptz)");
- for(const file of ['202610300001_exclusive.sql','202610300002_catalog.sql','202610300003_newsletter.sql','202610300004_partner_access.sql','202610300005_continuing_program.sql'])await db.query(await readFile('supabase/migrations/'+file,'utf8'));
+ for(const file of ['202610300001_exclusive.sql','202610300002_catalog.sql','202610300003_newsletter.sql','202610300004_partner_access.sql','202610300005_continuing_program.sql','202611110001_partner_catalog.sql'])await db.query(await readFile('supabase/migrations/'+file,'utf8'));
  for(const [i,id] of ids.entries())await db.query('insert into auth.users(id,email,email_confirmed_at) values($1,$2,now())',[id,`fixture-${i}@example.invalid`]);
  await db.query('insert into exclusive_private.admins values($1)',[ids[0]]);
  await db.query("insert into exclusive_private.campaigns(id,slug,name,active,ends_at) values($1,'test-campaign','Synthetic test only',true,now()+interval '2 days')",[campaign]);
