@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-04T19:36:16Z",
+  "updatedAt": "2026-11-11T06:48:21Z",
   "apps": [
     {
       "packageName": "com.watchfacestudio.artemis2celebration",
@@ -13,6 +13,12 @@
       "title": "Cyber Mechanica Watch Face",
       "shortDescription": "Futuristic watch face for Wear OS with weather, steps and three color styles",
       "imageUrl": "https://play-lh.googleusercontent.com/4HsTi8Gr2fiKX0OU7uixdnHvSXnw5yMaH92jSIE0pxNT8h0qnTulRbqMhXe5MnaXRAJQpFgPbXkb27I-HOmk=s512-rw"
+    },
+    {
+      "packageName": "com.watchfacestudio.terrapiatta",
+      "title": "Flat Earth Animated Watch Face",
+      "shortDescription": "An animated flat world for Wear OS, with moon phases, weather and wrist motion",
+      "imageUrl": "https://play-lh.googleusercontent.com/OVclsLjm9NLOVpZsVmsF_6rXRrfVsXwVaham6WAL7-eu-iDNJTah4D-7Jct6cb3PI1Vk21MFdzrAwLBQ2mLS5A=s512-rw"
     },
     {
       "packageName": "com.watchfacestudio.gearweirdo",
