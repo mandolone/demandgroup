@@ -17,7 +17,20 @@ const dialog=$('#auth-dialog');
 function status(message){$('#status').textContent=message;}
 function renderCatalog(items){
  const target=$('#exclusive-grid');target.replaceChildren();
- for(const p of products){const item=items.find(i=>i.id===p.id);if(!item)continue;const card=el('article',undefined,'exclusive-card');const image=el('img');image.src=p.image;image.alt=p.name+' — actual watch face';image.width=512;image.height=512;image.loading='lazy';card.append(image,el('h3',p.name),el('p',p.description),el('p',item.available?'Codes available through your partner':'No codes available','micro'));const b=el('button',item.available?'Get your complimentary watch face':'Currently unavailable','buy');b.disabled=!item.available;b.onclick=()=>openAuth(p.id);card.append(b);const listing=el('a','Check device compatibility ↗');listing.href='https://play.google.com/store/apps/details?id='+encodeURIComponent(p.package_name);listing.target='_blank';listing.rel='noopener noreferrer';card.append(listing);target.append(card);}
+ for(const p of products){
+  const item=items.find(i=>i.id===p.id);if(!item)continue;
+  const isFree=p.free===true;
+  const playUrl='https://play.google.com/store/apps/details?id='+encodeURIComponent(p.package_name);
+  const card=el('article',undefined,'exclusive-card');
+  const image=el('img');image.src=p.image;image.alt=p.name+' — actual watch face';image.width=512;image.height=512;image.loading='lazy';
+  card.append(image,el('h3',p.name),el('p',p.description),el('p',isFree?'Free on Google Play · No promotional code needed':item.available?'Codes available through your partner':'No codes available','micro'));
+  if(isFree){
+   const install=el('a','Install free on Google Play ↗','buy');install.href=playUrl;install.target='_blank';install.rel='noopener noreferrer';card.append(install);
+  }else{
+   const claim=el('button',item.available?'Get your complimentary watch face':'Currently unavailable','buy');claim.disabled=!item.available;claim.onclick=()=>openAuth(p.id);card.append(claim);
+  }
+  const listing=el('a','Check device compatibility ↗');listing.href=playUrl;listing.target='_blank';listing.rel='noopener noreferrer';card.append(listing);target.append(card);
+ }
 }
 async function loadStock(){
  const gate=$('#access-status');
